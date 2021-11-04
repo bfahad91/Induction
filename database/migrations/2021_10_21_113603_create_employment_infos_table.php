@@ -15,15 +15,14 @@ class CreateEmploymentInfosTable extends Migration
     {
         Schema::create('employment_infos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('application_id');
             $table->string('employerName');
-            $table->string('to');
-            $table->string('from');
+            $table->string('to_employer');
+            $table->string('from_employer');
             $table->string('position');
             $table->string('responsibilities');
             $table->integer('is_recent')->nullable();
             $table->timestamps();
-
-            $table->foreignId('application_id');
         });
     }
 

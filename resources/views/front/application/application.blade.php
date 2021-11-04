@@ -14,6 +14,7 @@
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 <style>
     * {
@@ -100,13 +101,13 @@
 
     <form id="regForm" method="POST" action="{{ route('personal.submit') }}" enctype="multipart/form-data">
         <h1>OGRA Registration Form</h1>
-        <div> Apply For post: <b>{{ $advertisement->title }} </b></div> <br>
+
         @csrf
         <!-- One "tab" for each step in the form: -->
-        <div class="tab">
+        <div class="tab row" style="display: flex">
             <h1>Personal Information:</h1>
-            <label for="Full name">Full Name</label>
             <input style="width:150px" name="advertisement_id" value="{{ $advertisement->id }}" type="hidden">
+
             <input style="width:150px" name="fullName" value="">
             <input style="width:150px" name="picture" value="">
             <input style="width:150px" name="fatherName" value="">
@@ -126,6 +127,11 @@
             <input style="width:150px" type="number" name="residence" value="">
             <input style="width:150px" type="number" name="cell" value="">
             <input style="width:150px" type="email" name="email" value="">
+
+            <br>
+            <input style="width:150px" name="postQualificationExperience" value="">
+            <input style="width:150px" name="grossMonthlySalary" value="">
+            <input style="width:150px" name="professionalAchievements" value="">
         </div>
         <div class="tab">
             <h1>Academic Information</h1>
@@ -181,8 +187,8 @@
                             <tr>
                                 <td class="custom-tbl"><input type="text" name="degreeName[]" placeholder="Degree Name" class="form-control name_list" /></td>
                                 <td class="custom-tbl"><input type="text" name="Institute[]" placeholder="Institute Name" class="form-control name_list" /></td>
-                                <td class="custom-tbl"><input type="text" name="to[]" placeholder="To" class="form-control name_list" /></td>
-                                <td class="custom-tbl"><input type="text" name="from[]" placeholder="From" class="form-control name_list" /></td>
+                                <td class="custom-tbl"><input type="text" name="to_prof[]" placeholder="To" class="form-control name_list" /></td>
+                                <td class="custom-tbl"><input type="text" name="from_prof[]" placeholder="From" class="form-control name_list" /></td>
                                 <td class="custom-tbl"><input type="text" name="passingYear[]" placeholder="PassingYear" class="form-control name_list" /></td>
                                 <td class="custom-tbl"><input type="text" name="marksObtained[]" placeholder="Marks Obtained" class="form-control name_list" /></td>
                                 <td class="custom-tbl"><input type="text" name="totalMarks[]" placeholder="Total Marks" class="form-control name_list" /></td>
@@ -201,9 +207,6 @@
         <div class="tab">
             <h1>Employment Record:</h1>
             <br>
-            <input style="width:150px" name="postQualificationExperience" value="">
-            <input style="width:150px" name="grossMonthlySalary" value="">
-            <input style="width:150px" name="professionalAchievements" value="">
 
             <div class="form-group">
 
@@ -221,8 +224,8 @@
                     <table class="table table-bordered" id="dynamic_field_emp">
                         <tr>
                             <td class="custom-tbl"><input type="text" name="employerName[]" placeholder="Degree Name" class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="to[]" placeholder="To" class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="from[]" placeholder="From" class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="to_emp[]" placeholder="To" class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="from_emp[]" placeholder="From" class="form-control name_list" /></td>
                             <td class="custom-tbl"><input type="text" name="position[]" placeholder="Position" class="form-control name_list" /></td>
                             <td class="custom-tbl"><input type="text" name="responsibilities[]" placeholder="Responsibilities" class="form-control name_list" /></td>
 
@@ -233,14 +236,14 @@
 
         </div>
         </div>
-        <div class="tab">
-            <h1>Employment Record:</h1>
+        {{-- <div class="tab">
+            <h1>Additional Info:</h1>
             <br>
             <input style="width:150px" name="postQualificationExperience" value="">
             <input style="width:150px" name="grossMonthlySalary" value="">
             <input style="width:150px" name="professionalAchievements" value="">
 
-        </div>
+        </div> --}}
 
 
         <div style="overflow:auto;">

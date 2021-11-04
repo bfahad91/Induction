@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Request;
 
 class ApplicationFormRequest extends FormRequest
 {
@@ -22,6 +23,19 @@ class ApplicationFormRequest extends FormRequest
      */
     public function rules()
     {
+        $input = Request::all();
+        $rules = [];
+        foreach ($input['degreeName'] as $key => $value) {
+            $rules["degreeName.{$key}"] = 'required';
+            $rules["Institute.{$key}"] = 'required';
+            $rules["to.{$key}"] = 'required';
+            $rules["from.{$key}"] = 'required';
+            $rules["passingYear.{$key}"] = 'required';
+            $rules["marksObtained.{$key}"] = 'required';
+            $rules["totalMarks.{$key}"] = 'required';
+            $rules["GPA_or_grade.{$key}"] = 'required';
+            $rules["remarks.{$key}"] = 'required';
+        }
         return [
         'advertisement_id' => 'required',
         'fullName'=> 'required',

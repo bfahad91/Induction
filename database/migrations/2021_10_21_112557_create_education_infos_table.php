@@ -16,9 +16,9 @@ class CreateEducationInfosTable extends Migration
         Schema::create('education_infos', function (Blueprint $table) {
             $table->id();
             $table->string('degreeName');
-            $table->string('Institute');
-            $table->string('to');
-            $table->string('from');
+            $table->string('institute');
+            $table->string('to_institute');
+            $table->string('from_institute');
             $table->string('passingYear');
             $table->string('marksObtained');
             $table->string('totalMarks');

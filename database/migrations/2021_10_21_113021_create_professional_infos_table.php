@@ -17,8 +17,8 @@ class CreateProfessionalInfosTable extends Migration
             $table->id();
             $table->string('courseName');
             $table->string('instituteName');
-            $table->string('to');
-            $table->string('from');
+            $table->string('to_prof_inst');
+            $table->string('from_prof_inst');
             $table->string('description');
             $table->timestamps();
 

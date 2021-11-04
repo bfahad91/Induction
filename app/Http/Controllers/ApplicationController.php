@@ -41,7 +41,18 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+
+        $count = count($request->courseName);
+        for ($i=0; $i < $count; $i++) {
+            $education['courseName'] = $request->courseName[$i];
+            $education['instituteName'] = $request->instituteName[$i];
+            $education['to'] = $request->to[$i];
+            $education['from'] = $request->from[$i];
+            $education['description'] = $request->description[$i];
+            $education['application_id'] = 1;
+            $profession[] = ProfessionalInfo::create($education);
+        }
+        dd($request->all(), $profession);
         $application = Application::create(['advertisement_id' => $request->advertisement_id,
         'fullName' => $request->fullName,
         'picture' => $request->picture,
@@ -67,7 +78,13 @@ class ApplicationController extends Controller
         'professionalAchievements' => $request->professionalAchievements,
         'name_ad_newspaper' => $request->name_ad_newspaper,]);
 
-
+        ProfessionalInfo::create([
+            'courseName' => $request->courseName,
+            'instituteName' => $request->instituteName,
+            'to' => $request->to,
+            'from' => $request->from,
+            'description' => $request->description,
+            'application_id' => $application->id,]);
         EducationInfo::create(['degreeName' => $request->degreeName,
         'Institute' => $request->Institute,
         'to' => $request->to,
@@ -79,12 +96,7 @@ class ApplicationController extends Controller
         'remarks' => $request->remarks,
         'application_id' => $application->id,]);
 
-        ProfessionalInfo::create(['courseName' => $request->courseName,
-        'instituteName' => $request->instituteName,
-        'to' => $request->to,
-        'from' => $request->from,
-        'description' => $request->description,
-        'application_id' => $application->id,]);
+
 
         EmploymentInfo::create(['employerName' => $request->remarks,
         'to' => $request->to,
