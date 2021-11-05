@@ -12,9 +12,9 @@ class EducationInfo extends Model
 
     protected $fillable = [
         'degreeName',
-        'Institute',
-        'to',
-        'from',
+        'institute',
+        'to_institute',
+        'from_institute',
         'passingYear',
         'marksObtained',
         'totalMarks',

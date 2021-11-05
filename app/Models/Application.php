@@ -45,7 +45,7 @@ class Application extends Model
      */
     public function advertisement(): HasOne
     {
-        return $this->hasOne(Advertisement::class,'advertisement_id','id');
+        return $this->hasOne(Advertisement::class,'id','advertisement_id');
     }
 
     /**

@@ -12,8 +12,8 @@ class EmploymentInfo extends Model
 
     protected $fillable = [
         'employerName',
-        'to',
-        'from',
+        'to_employer',
+        'from_employer',
         'position',
         'responsibilities',
         'application_id'

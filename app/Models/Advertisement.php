@@ -11,15 +11,6 @@ class Advertisement extends Model
     use HasFactory;
     protected $fillable = ['title','title_urdu','adImg','description','start_date','end_date'];
 
-    /**
-     * Get all of the users for the Advertisement
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function users(): HasMany
-    {
-        return $this->hasMany(User::class, 'user_id', 'id');
-    }
 
     /**
      * Get all of the applications for the Advertisement

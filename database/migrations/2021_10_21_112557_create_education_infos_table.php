@@ -15,6 +15,7 @@ class CreateEducationInfosTable extends Migration
     {
         Schema::create('education_infos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('application_id');  // FK application model
             $table->string('degreeName');
             $table->string('institute');
             $table->string('to_institute');
@@ -26,7 +27,6 @@ class CreateEducationInfosTable extends Migration
             $table->string('remarks');
             $table->timestamps();
 
-            $table->foreignId('application_id');
         });
     }
 

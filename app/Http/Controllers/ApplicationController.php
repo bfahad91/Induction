@@ -9,6 +9,7 @@ use App\Models\EducationInfo;
 use App\Models\EmploymentInfo;
 use App\Models\ProfessionalInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ApplicationController extends Controller
 {
@@ -20,7 +21,7 @@ class ApplicationController extends Controller
     public function index()
     {
         $ads = Advertisement::all();
-        return view('front.advertisement.list',compact('ads'));
+        return view('front.advertisement.list', compact('ads'));
     }
 
     /**
@@ -30,7 +31,7 @@ class ApplicationController extends Controller
      */
     public function create(Advertisement $advertisement)
     {
-        return view('front.application.application',compact('advertisement'));
+        return view('front.application.application', compact('advertisement'));
     }
 
     /**
@@ -39,74 +40,112 @@ class ApplicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ApplicationFormRequest $request)
     {
+        $prof_count = count($request->courseName);
+        $degree_count = count($request->degreeName);
+        $emp_count = count($request->employerName);
+        $rules = [];
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-        $count = count($request->courseName);
-        for ($i=0; $i < $count; $i++) {
-            $education['courseName'] = $request->courseName[$i];
-            $education['instituteName'] = $request->instituteName[$i];
-            $education['to'] = $request->to[$i];
-            $education['from'] = $request->from[$i];
-            $education['description'] = $request->description[$i];
-            $education['application_id'] = 1;
-            $profession[] = ProfessionalInfo::create($education);
+        $imageName = date("d-m-Y").'-'.$request->image->getClientOriginalName();
+
+        // $request->image->move(public_path('images/ads'), $imageName);
+        $img = $request->file('picture')->storeAs('public/uploads/images',$imageName);
+
+        $request->merge(['adImg'=> 'storage/uploads/Ads/'.$imageName]);
+        for ($i = 0; $i < $prof_count; $i++) {
+            $rules["courseName.{$i}"] = 'required';
+            $rules["instituteName.{$i}"] = 'required';
+            $rules["to_prof_inst.{$i}"] = 'required';
+            $rules["from_prof_inst.{$i}"] = 'required';
+            $rules["description.{$i}"] = 'required';
         }
-        dd($request->all(), $profession);
-        $application = Application::create(['advertisement_id' => $request->advertisement_id,
-        'fullName' => $request->fullName,
-        'picture' => $request->picture,
-        'fatherName' => $request->fatherName,
-        'dob' => $request->dob,
-        'domicile' => $request->domicile,
-        'age' => $request->age,
-        'birthPlace' => $request->birthPlace,
-        'maritalStatus' => $request->maritalStatus,
-        'religion' => $request->religion,
-        'nationality' => $request->nationality,
-        'cnic' => $request->cnic,
-        'permanentAddress' => $request->permanentAddress,
-        'presentAddress' => $request->presentAddress,
-        // 'education_infos' => $request->education_infos,
-        'pec_No' => $request->pec_No,
-        'office' => $request->office,
-        'residence' => $request->residence,
-        'cell' => $request->cell,
-        'email' => $request->email,
-        'postQualificationExperience' => $request->postQualificationExperience,
-        'grossMonthlySalary' => $request->grossMonthlySalary,
-        'professionalAchievements' => $request->professionalAchievements,
-        'name_ad_newspaper' => $request->name_ad_newspaper,]);
+        for ($i = 0; $i < $degree_count; $i++) {
+            $rules["degreeName.{$i}"] = 'required';
+            $rules["institute.{$i}"] = 'required';
+            $rules["to_institute.{$i}"] = 'required';
+            $rules["from_institute.{$i}"] = 'required';
+            $rules["passingYear.{$i}"] = 'required';
+            $rules["marksObtained.{$i}"] = 'required';
+            $rules["totalMarks.{$i}"] = 'required';
+            $rules["GPA_or_grade.{$i}"] = 'required';
+            $rules["remarks.{$i}"] = 'required';
+        }
+        for ($i = 0; $i < $emp_count; $i++) {
+            $rules["employerName.{$i}"] = 'required';
+            $rules["to_employer.{$i}"] = 'required';
+            $rules["from_employer.{$i}"] = 'required';
+            $rules["position.{$i}"] = 'required';
+            $rules["responsibilities.{$i}"] = 'required';
+        }
 
-        ProfessionalInfo::create([
-            'courseName' => $request->courseName,
-            'instituteName' => $request->instituteName,
-            'to' => $request->to,
-            'from' => $request->from,
-            'description' => $request->description,
-            'application_id' => $application->id,]);
-        EducationInfo::create(['degreeName' => $request->degreeName,
-        'Institute' => $request->Institute,
-        'to' => $request->to,
-        'from' => $request->from,
-        'passingYear' => $request->passingYear,
-        'marksObtained' => $request->marksObtained,
-        'totalMarks' => $request->totalMarks,
-        'GPA_or_grade' => $request->GPA_or_grade,
-        'remarks' => $request->remarks,
-        'application_id' => $application->id,]);
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        }
+        // dd($rules,$validator->validated(),$request->validated());
 
+        $application = Application::create([
+            'advertisement_id' => $request->advertisement_id,
+            'fullName' => $request->fullName,
+            'picture' => $request->picture,
+            'fatherName' => $request->fatherName,
+            'dob' => $request->dob,
+            'domicile' => $request->domicile,
+            'age' => $request->age,
+            'birthPlace' => $request->birthPlace,
+            'maritalStatus' => $request->maritalStatus,
+            'religion' => $request->religion,
+            'nationality' => $request->nationality,
+            'cnic' => $request->cnic,
+            'permanentAddress' => $request->permanentAddress,
+            'presentAddress' => $request->presentAddress,
+            'pec_No' => $request->pec_No,
+            'office' => $request->office,
+            'residence' => $request->residence,
+            'cell' => $request->cell,
+            'email' => $request->email,
+            'postQualificationExperience' => $request->postQualificationExperience,
+            'grossMonthlySalary' => $request->grossMonthlySalary,
+            'professionalAchievements' => $request->professionalAchievements,
+            'name_ad_newspaper' => $request->name_ad_newspaper,
+        ]);
+        for ($i = 0; $i < $prof_count; $i++) {
+            $profession['courseName'] = $request->courseName[$i];
+            $profession['instituteName'] = $request->instituteName[$i];
+            $profession['to_prof_inst'] = $request->to_prof_inst[$i];
+            $profession['from_prof_inst'] = $request->from_prof_inst[$i];
+            $profession['description'] = $request->description[$i];
+            $profession['application_id'] = $application->id;
+            $professional[] = ProfessionalInfo::create($profession);
+        }
+        for ($i = 0; $i < $degree_count; $i++) {
+            $education["degreeName"] = $request->degreeName[$i];
+            $education["institute"] = $request->institute[$i];
+            $education["to_institute"] = $request->to_institute[$i];
+            $education["from_institute"] = $request->from_institute[$i];
+            $education["passingYear"] = $request->passingYear[$i];
+            $education["marksObtained"] = $request->marksObtained[$i];
+            $education["totalMarks"] = $request->totalMarks[$i];
+            $education["GPA_or_grade"] = $request->GPA_or_grade[$i];
+            $education["remarks"] = $request->remarks[$i];
+            $education['application_id'] = $application->id;
+            $educational[] = EducationInfo::create($education);
+        }
+        for ($i = 0; $i < $emp_count; $i++) {
+            $emp["employerName"] = $request->employerName[$i];
+            $emp["to_employer"] = $request->to_employer[$i];
+            $emp["from_employer"] = $request->from_employer[$i];
+            $emp["position"] = $request->position[$i];
+            $emp["responsibilities"] = $request->responsibilities[$i];
+            $emp['application_id'] = $application->id;
+            $employment[] = EmploymentInfo::create($emp);
+        }
 
-
-        EmploymentInfo::create(['employerName' => $request->remarks,
-        'to' => $request->to,
-        'from' => $request->from,
-        'position' => $request->position,
-        'responsibilities' => $request->responsibilities,
-        'application_id' => $application->id,]);
-
-        // dd(2);
-        return redirect()->route('ads.index')->with('success','Form Submitted!');
+        return redirect()->route('ads.index')->with('success', 'Form Submitted!');
     }
 
     /**

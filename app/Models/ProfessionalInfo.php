@@ -13,8 +13,8 @@ class ProfessionalInfo extends Model
     protected $fillable = [
         'courseName',
         'instituteName',
-        'to',
-        'from',
+        'to_prof_inst',
+        'from_prof_inst',
         'description',
         'application_id'
     ];

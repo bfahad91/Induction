@@ -15,7 +15,7 @@ class CreateApplicationsTable extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('advertisement_id');
+            $table->foreignId('advertisement_id'); // FK advertisement model
             $table->string('fullName');
             $table->string('picture');
             $table->string('fatherName');

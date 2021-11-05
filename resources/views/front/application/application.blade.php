@@ -14,7 +14,8 @@
 <!DOCTYPE html>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 <style>
     * {
@@ -100,105 +101,262 @@
 <body>
 
     <form id="regForm" method="POST" action="{{ route('personal.submit') }}" enctype="multipart/form-data">
-        <h1>OGRA Registration Form</h1>
-
         @csrf
+        <h1>OGRA Registration Form</h1>
+        <div class="form-group">
+            <label>Name of Position applied for:</label>
+            <span class="form-control"><b>{{ $advertisement->title }} </b></span> <br>
+            {{-- <input type="text" class="form-control" data-error="You must have a name." name="fullName" placeholder="fullName" required> --}}
+
+            <!-- Error -->
+            <div class="help-block with-errors"></div>
+        </div>
         <!-- One "tab" for each step in the form: -->
         <div class="tab row" style="display: flex">
             <h1>Personal Information:</h1>
             <input style="width:150px" name="advertisement_id" value="{{ $advertisement->id }}" type="hidden">
 
-            <input style="width:150px" name="fullName" value="">
-            <input style="width:150px" name="picture" value="">
-            <input style="width:150px" name="fatherName" value="">
-            <input style="width:150px" name="dob" value="">
-            <input style="width:150px" name="age" value="">
-            <input style="width:150px" name="birthPlace" value="">
-            <input style="width:150px" name="maritalStatus" value="">
-            <input style="width:150px" name="religion" value="">
-            <input style="width:150px" name="nationality" value="">
-            <input style="width:150px" type="number" name="cnic" value="">
-            <input style="width:150px" name="domicile" value="">
-            <input style="width:150px" name="permanentAddress" value="">
-            <input style="width:150px" name="presentAddress" value="">
-            <input style="width:150px" name="pec_No" value="">
-            <input style="width:150px" name="fullName" value="">
-            <input style="width:150px" type="number" name="office" value="">
-            <input style="width:150px" type="number" name="residence" value="">
-            <input style="width:150px" type="number" name="cell" value="">
-            <input style="width:150px" type="email" name="email" value="">
+            <div class="form-group col-md-12 row">
+                <div class="form-group col-md-3">
+                    <label>Full Name:</label>
+                    <input type="text" class="form-control" data-error="You must have a name." name="fullName" placeholder="" required>
 
-            <br>
-            <input style="width:150px" name="postQualificationExperience" value="">
-            <input style="width:150px" name="grossMonthlySalary" value="">
-            <input style="width:150px" name="professionalAchievements" value="">
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>picture:</label>
+                <input type="file" class="form-control" data-error="You must have a name." name="image" placeholder="" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>picture:</label>
+                    <img src="" alt="">
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label>Father Name:</label>
+                    <input type="text" class="form-control" data-error="You must have a name." name="fatherName" id="fatherName" placeholder="" required>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Date of Birth:</label>
+                    <input type="date" class="form-control" name="dob" data-error="You must have a name." id="dob" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Age:</label>
+                    <input type="text" class="form-control" name="age" data-error="You must have a name." id="age" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Birth Place:</label>
+                    <input type="text" class="form-control" name="birthPlace" data-error="You must have a name." id="birthPlace" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Marital Status:</label>
+                    <select class="form-control" name="maritalStatus" id="">
+                        <option value="" selected disabled>-- select maritial status --</option>
+                        <option value="single">single</option>
+                        <option value="married">Married</option>
+                    </select>
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Religion:</label>
+                    <input type="text" class="form-control" name="religion" data-error="You must have a name." id="religion" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Nationality:</label>
+                    <input type="text" class="form-control" name="nationality" data-error="You must have a name." id="nationality" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>CNIC:</label>
+                    <input type="number" class="form-control" name="cnic" data-error="You must have a name." id="cnic" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>phone Number:</label>
+                    <input type="number" class="form-control" name="number" data-error="You must have a name." id="number" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Domicile:</label>
+                    <input type="text" class="form-control" name="domicile" data-error="You must have a name." id="domicile" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Permanent Address:</label>
+                    <input type="text" class="form-control" name="permanentAddress" data-error="You must have a name." id="permanentAddress" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Present Address:</label>
+                    <input type="text" class="form-control" name="presentAddress" data-error="You must have a name." id="presentAddress" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>PEC Number:</label>
+                    <input type="text" class="form-control" name="pec_No" data-error="You must have a name." id="pec_No" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Office phone No:</label>
+                    <input type="text" class="form-control" name="office" data-error="You must have a name." id="office" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Residence No:</label>
+                    <input type="text" class="form-control" name="residence" data-error="You must have a name." id="residence" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Cell No:</label>
+                    <input type="number" class="form-control" name="cell" data-error="You must have a name." id="cell" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Email:</label>
+                    <input type="email" class="form-control" name="email" data-error="You must have a name." id="email" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>postQualificationExperience:</label>
+                    <input type="postQualificationExperience" class="form-control" name="postQualificationExperience" data-error="You must have a name." id="postQualificationExperience" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>grossMonthlySalary:</label>
+                    <input type="text" class="form-control" name="grossMonthlySalary" data-error="You must have a name." id="grossMonthlySalary" placeholder="" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label>professionalAchievements:</label>
+                    <input type="number" class="form-control" name="professionalAchievements" data-error="You must have a name." id="professionalAchievements" placeholder="Professional Achievements" required>
+
+                    <!-- Error -->
+                    <div class="help-block with-errors"></div>
+                </div>
+            </div>
         </div>
         <div class="tab">
             <h1>Academic Information</h1>
             <p>Educational, Technical & Professional Qualifications(Please start with most recent qualifications)</p>
             <p class="form-group" id="dataTableID" style="margin-right: 5px;">
                 <label>Degree</label>
-                <div class="form-group">
+            <div class="form-group">
 
-                       <div class="alert alert-danger print-error-msg" style="display:none">
-                       <ul></ul>
-                       </div>
+                <div class="alert alert-danger print-error-msg" style="display:none">
+                    <ul></ul>
+                </div>
 
 
-                       <div class="alert alert-success print-success-msg" style="display:none">
-                       <ul></ul>
-                       </div>
+                <div class="alert alert-success print-success-msg" style="display:none">
+                    <ul></ul>
+                </div>
 
-                       <?php $c = 1; ?>
-                       <div class="table-responsive col-md-2-offset col-md-8">
-                           <table class="table table-bordered" id="dynamic_field">
-                               <tr>
-                                   <td class="custom-tbl"><input type="text" name="courseName[]" placeholder="Course Name" class="form-control name_list" /></td>
-                                   <td class="custom-tbl"><input type="text" name="instituteName[]" placeholder="Institute Name" class="form-control name_list" /></td>
-                                   <td class="custom-tbl"><input type="text" name="to[]" placeholder="To" class="form-control name_list" /></td>
-                                   <td class="custom-tbl"><input type="text" name="from[]" placeholder="From" class="form-control name_list" /></td>
-                                   <td class="custom-tbl"><input type="text" name="description[]" placeholder="Description" class="form-control name_list" /></td>
+                <?php $c = 1; ?>
+                <div class="table-responsive col-md-2-offset col-md-8">
+                    <table class="table table-bordered" id="dynamic_field">
+                        <tr>
+                            <td class="custom-tbl"><input type="text" name="courseName[]" placeholder="Course Name"
+                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="instituteName[]"
+                                    placeholder="Institute Name" class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="to_prof_inst[]" placeholder="To"
+                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="from_prof_inst[]" placeholder="From"
+                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="description[]" placeholder="Description"
+                                    class="form-control name_list" /></td>
 
-                                   <td><button type="button" name="add" id="add" class="btn btn-success"><b>+</b></span></button></td>
-                               </tr>
-                           </table>
-                       </div>
+                            <td><button type="button" name="add" id="add"
+                                    class="btn btn-success"><b>+</b></span></button></td>
+                        </tr>
+                    </table>
+                </div>
 
-               </div>
+            </div>
         </div>
 
         <div class="tab">
             <h1>Professional Development:</h1>
             <p class="form-group" id="dataTableID" style="margin-right: 5px;">
-                <div class="form-group">
+            <div class="form-group">
 
-                    <div class="alert alert-danger print-error-msg" style="display:none">
+                <div class="alert alert-danger print-error-msg" style="display:none">
                     <ul></ul>
-                    </div>
+                </div>
 
 
-                    <div class="alert alert-success print-success-msg" style="display:none">
+                <div class="alert alert-success print-success-msg" style="display:none">
                     <ul></ul>
-                    </div>
+                </div>
 
-                    <?php $c = 1; ?>
-                    <div class="table-responsive col-md-2-offset col-md-8">
-                        <table class="table table-bordered" id="dynamic_field_prof">
-                            <tr>
-                                <td class="custom-tbl"><input type="text" name="degreeName[]" placeholder="Degree Name" class="form-control name_list" /></td>
-                                <td class="custom-tbl"><input type="text" name="Institute[]" placeholder="Institute Name" class="form-control name_list" /></td>
-                                <td class="custom-tbl"><input type="text" name="to_prof[]" placeholder="To" class="form-control name_list" /></td>
-                                <td class="custom-tbl"><input type="text" name="from_prof[]" placeholder="From" class="form-control name_list" /></td>
-                                <td class="custom-tbl"><input type="text" name="passingYear[]" placeholder="PassingYear" class="form-control name_list" /></td>
-                                <td class="custom-tbl"><input type="text" name="marksObtained[]" placeholder="Marks Obtained" class="form-control name_list" /></td>
-                                <td class="custom-tbl"><input type="text" name="totalMarks[]" placeholder="Total Marks" class="form-control name_list" /></td>
-                                <td class="custom-tbl"><input type="text" name="GPA_or_grade[]" placeholder="GPA/Grade" class="form-control name_list" /></td>
-                                <td class="custom-tbl"><input type="text" name="remarks[]" placeholder="Remarks" class="form-control name_list" /></td>
+                <?php $c = 1; ?>
+                <div class="table-responsive col-md-2-offset col-md-8">
+                    <table class="table table-bordered" id="dynamic_field_prof">
+                        <tr>
+                            <td class="custom-tbl"><input type="text" name="degreeName[]" placeholder="Degree Name"
+                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="institute[]"
+                                    placeholder="Institute Name" class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="to_institute[]" placeholder="To"
+                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="from_institute[]" placeholder="From"
+                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="passingYear[]" placeholder="PassingYear"
+                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="marksObtained[]"
+                                    placeholder="Marks Obtained" class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="totalMarks[]" placeholder="Total Marks"
+                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="GPA_or_grade[]" placeholder="GPA/Grade"
+                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="remarks[]" placeholder="Remarks"
+                                    class="form-control name_list" /></td>
 
-                                <td><button type="button" name="add" id="add_prof" class="btn btn-success"><b>+</b></span></button></td>
-                            </tr>
-                        </table>
-                    </div>
+                            <td><button type="button" name="add" id="add_prof"
+                                    class="btn btn-success"><b>+</b></span></button></td>
+                        </tr>
+                    </table>
+                </div>
 
             </div>
         </div>
@@ -211,30 +369,36 @@
             <div class="form-group">
 
                 <div class="alert alert-danger print-error-msg" style="display:none">
-                <ul></ul>
+                    <ul></ul>
                 </div>
 
 
                 <div class="alert alert-success print-success-msg" style="display:none">
-                <ul></ul>
+                    <ul></ul>
                 </div>
 
                 <?php $c = 1; ?>
                 <div class="table-responsive col-md-2-offset col-md-8">
                     <table class="table table-bordered" id="dynamic_field_emp">
                         <tr>
-                            <td class="custom-tbl"><input type="text" name="employerName[]" placeholder="Degree Name" class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="to_emp[]" placeholder="To" class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="from_emp[]" placeholder="From" class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="position[]" placeholder="Position" class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="responsibilities[]" placeholder="Responsibilities" class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="employerName[]"
+                                    placeholder="Degree Name" class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="to_employer[]" placeholder="To"
+                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="from_employer[]" placeholder="From"
+                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="position[]" placeholder="Position"
+                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="responsibilities[]"
+                                    placeholder="Responsibilities" class="form-control name_list" /></td>
 
-                            <td><button type="button" name="add" id="add_emp" class="btn btn-success"><b>+</b></span></button></td>
+                            <td><button type="button" name="add" id="add_emp"
+                                    class="btn btn-success"><b>+</b></span></button></td>
                         </tr>
                     </table>
                 </div>
 
-        </div>
+            </div>
         </div>
         {{-- <div class="tab">
             <h1>Additional Info:</h1>
@@ -260,49 +424,56 @@
             <span class="step"></span>
         </div>
     </form>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function() {
 
-        $url = '{{ route('personal.submit') }}' ;
-          var i=1;
-
-
-          $('#add').click(function(){
-               i++;
-               $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td class="custom-tbl"><input type="text" name="courseName[]" placeholder="Course Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="instituteName[]" placeholder="Institute Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="to[]" placeholder="To" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="from[]" placeholder="From" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="description[]" placeholder="Description" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
-          });
+            $url = '{{ route('personal.submit') }}';
+            var i = 1;
 
 
-          $(document).on('click', '.btn_remove', function(){
-               var button_id = $(this).attr("id");
-               $('#row'+button_id+'').remove();
-          });
-
-        //   Add Professional Dynamic rows
-        $('#add_prof').click(function(){
-               i++;
-               $('#dynamic_field_prof').append('<tr id="row'+i+'" class="dynamic-added"><td class="custom-tbl"><input type="text" name="degreeName[]" placeholder="Degree Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="Institute[]" placeholder="Institute Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="to[]" placeholder="To" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="from[]" placeholder="From" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="passingYear[]" placeholder="PassingYear" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="marksObtained[]" placeholder="Marks Obtained" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="totalMarks[]" placeholder="Total Marks" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="GPA_or_grade[]" placeholder="GPA/Grade" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="remarks[]" placeholder="Remarks" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove_prof">X</button></td></tr>');
-          });
+            $('#add').click(function() {
+                i++;
+                $('#dynamic_field').append('<tr id="row' + i +
+                    '" class="dynamic-added"><td class="custom-tbl"><input type="text" name="courseName[]" placeholder="Course Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="instituteName[]" placeholder="Institute Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="to_prof_inst[]" placeholder="To" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="from_prof_inst[]" placeholder="From" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="description[]" placeholder="Description" class="form-control name_list" /></td><td><button type="button" name="remove" id="' +
+                    i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+            });
 
 
-          $(document).on('click', '.btn_remove_prof', function(){
-               var button_id = $(this).attr("id");
-               $('#row'+button_id+'').remove();
-          });
+            $(document).on('click', '.btn_remove', function() {
+                var button_id = $(this).attr("id");
+                $('#row' + button_id + '').remove();
+            });
 
-        //   Add Employment Dynamic rows
+            //   Add Professional Dynamic rows
+            $('#add_prof').click(function() {
+                i++;
+                $('#dynamic_field_prof').append('<tr id="row' + i +
+                    '" class="dynamic-added"><td class="custom-tbl"><input type="text" name="degreeName[]" placeholder="Degree Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="institute[]" placeholder="Institute Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="to_institute[]" placeholder="To" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="from_institute[]" placeholder="From" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="passingYear[]" placeholder="PassingYear" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="marksObtained[]" placeholder="Marks Obtained" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="totalMarks[]" placeholder="Total Marks" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="GPA_or_grade[]" placeholder="GPA/Grade" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="remarks[]" placeholder="Remarks" class="form-control name_list" /></td><td><button type="button" name="remove" id="' +
+                    i + '" class="btn btn-danger btn_remove_prof">X</button></td></tr>');
+            });
 
-        $('#add_emp').click(function(){
-               i++;
-               $('#dynamic_field_emp').append('<tr id="row'+i+'" class="dynamic-added"><td class="custom-tbl"><input type="text" name="employerName[]" placeholder="Degree Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="to[]" placeholder="To" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="from[]" placeholder="From" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="position[]" placeholder="Position" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="responsibilities[]" placeholder="Responsibilities" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove_emp">X</button></td></tr>');
-          });
+
+            $(document).on('click', '.btn_remove_prof', function() {
+                var button_id = $(this).attr("id");
+                $('#row' + button_id + '').remove();
+            });
+
+            //   Add Employment Dynamic rows
+
+            $('#add_emp').click(function() {
+                i++;
+                $('#dynamic_field_emp').append('<tr id="row' + i +
+                    '" class="dynamic-added"><td class="custom-tbl"><input type="text" name="employerName[]" placeholder="Degree Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="to_employer[]" placeholder="To" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="from_employer[]" placeholder="From" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="position[]" placeholder="Position" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="responsibilities[]" placeholder="Responsibilities" class="form-control name_list" /></td><td><button type="button" name="remove" id="' +
+                    i + '" class="btn btn-danger btn_remove_emp">X</button></td></tr>');
+            });
 
 
-          $(document).on('click', '.btn_remove_emp', function(){
-               var button_id = $(this).attr("id");
-               $('#row'+button_id+'').remove();
-          });
+            $(document).on('click', '.btn_remove_emp', function() {
+                var button_id = $(this).attr("id");
+                $('#row' + button_id + '').remove();
+            });
 
 
         });

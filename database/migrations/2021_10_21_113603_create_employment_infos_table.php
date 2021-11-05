@@ -15,7 +15,7 @@ class CreateEmploymentInfosTable extends Migration
     {
         Schema::create('employment_infos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('application_id');
+            $table->foreignId('application_id'); // FK application model
             $table->string('employerName');
             $table->string('to_employer');
             $table->string('from_employer');

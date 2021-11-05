@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Advertisement;
+use App\Models\Application;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -10,8 +11,8 @@ class AdminController extends Controller
 {
     public function GetAllApplication()
     {
-        $applications = User::with(['personal_info','professional_info','educational_info','employment_info','additional_info'])->get();
-        dd($applications);
+        $applications = Application::with(['education_info','employment_info','professional_info','advertisement'])->get();
+        // dd($applications);
         return view('Admin.applications',compact('applications'));
     }
 

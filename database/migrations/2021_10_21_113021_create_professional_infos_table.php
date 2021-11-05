@@ -15,6 +15,7 @@ class CreateProfessionalInfosTable extends Migration
     {
         Schema::create('professional_infos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('application_id'); // FK application model
             $table->string('courseName');
             $table->string('instituteName');
             $table->string('to_prof_inst');
@@ -22,7 +23,6 @@ class CreateProfessionalInfosTable extends Migration
             $table->string('description');
             $table->timestamps();
 
-            $table->foreignId('application_id');
         });
     }
 

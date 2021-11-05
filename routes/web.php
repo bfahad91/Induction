@@ -20,7 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('Ads/all', [ApplicationController::class,'index'])->name('ads.all');
+
 Route::middleware(['auth'])->group(function () {
 
     Route::prefix('admin')->group(function () {
@@ -28,11 +28,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('applications', [AdminController::class,'GetAllApplication'])->name('admin.applications');
         Route::get('ad/create', [AdminController::class,'CreateAd'])->name('ad.create');
         Route::post('ad/post', [AdminController::class,'PostAd'])->name('ad.post');
-        Route::get('Ads/list', [AdminController::class,'AdsList'])->name('ads.list');
+        Route::get('ads/list', [AdminController::class,'AdsList'])->name('ads.list');
         Route::get('ads/applications/{advertisement}', [AdminController::class,'AllApplications'])->name('ads.applications');
     });
 
 });
+    Route::get('Ads/all', [ApplicationController::class,'index'])->name('ads.all');
     Route::get('personal-Information/{advertisement}',[ApplicationController::class,'create'])->name('personal.info');
     Route::post('personal-Information/store',[ApplicationController::class,'store'])->name('personal.submit');
     Route::post('Ads/all',[ApplicationController::class,'index'])->name('ads.index');
