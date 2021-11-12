@@ -18,6 +18,7 @@ class CreateApplicationsTable extends Migration
             $table->foreignId('advertisement_id'); // FK advertisement model
             $table->string('fullName');
             $table->string('picture');
+            $table->string('cv')->nullable();
             $table->string('fatherName');
             $table->string('dob');
             $table->string('age');

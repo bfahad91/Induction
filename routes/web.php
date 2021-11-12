@@ -1,9 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ApplicationController;
-use Illuminate\Console\Application;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Front\AdvertisementController;
+use App\Http\Controllers\Front\ApplicationController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,26 +18,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+require __DIR__ . '/auth.php';
+
+Route::get('/', [ApplicationController::class, 'index'])->name('welcome');
+
+Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function () {
+    Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::get('applications', [AdminController::class, 'GetAllApplication'])->name('applications');
+    Route::get('ads/applications/{advertisement}', [AdvertisementController::class, 'Advertisment_Applications'])->name('advertisements.applications');
+    Route::resource('advertisements', AdvertisementController::class);
+    Route::post('ajax/active/ad/{id}', [AdvertisementController::class, 'isActive_Ajax'])->name('isActive');
+    Route::get('export/{advertisement}', [AdminController::class, 'export'])->name('export');
 });
-
-
-Route::middleware(['auth'])->group(function () {
-
-    Route::prefix('admin')->group(function () {
-        Route::view('dashboard', 'dashboard')->name('dashboard');
-        Route::get('applications', [AdminController::class,'GetAllApplication'])->name('admin.applications');
-        Route::get('ad/create', [AdminController::class,'CreateAd'])->name('ad.create');
-        Route::post('ad/post', [AdminController::class,'PostAd'])->name('ad.post');
-        Route::get('ads/list', [AdminController::class,'AdsList'])->name('ads.list');
-        Route::get('ads/applications/{advertisement}', [AdminController::class,'AllApplications'])->name('ads.applications');
-    });
-
+// public routes
+Route::group(['prefix' => 'applicant', 'as' => 'front.'], function () {
+    // Route::get('Ads/all', [ApplicationController::class, 'index'])->name('ads.all');
+    Route::get('post/apply/{advertisement}', [ApplicationController::class, 'create'])->name('post.apply');
+    Route::post('post/apply/store', [ApplicationController::class, 'store'])->name('post.store');
+    Route::get('Ads/all', [ApplicationController::class, 'index'])->name('ads.index');
 });
-    Route::get('Ads/all', [ApplicationController::class,'index'])->name('ads.all');
-    Route::get('personal-Information/{advertisement}',[ApplicationController::class,'create'])->name('personal.info');
-    Route::post('personal-Information/store',[ApplicationController::class,'store'])->name('personal.submit');
-    Route::post('Ads/all',[ApplicationController::class,'index'])->name('ads.index');
-    Route::get('Ad/user/store', [ApplicationController::class,'adUserStore'])->name('ad.user.store');
-require __DIR__.'/auth.php';
+Route::get('/foo', function () {
+    Artisan::call('storage:link');
+});

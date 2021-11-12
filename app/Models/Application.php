@@ -15,6 +15,7 @@ class Application extends Model
         'advertisement_id',
         'fullName',
         'picture',
+        'cv',
         'fatherName',
         'dob',
         'domicile',

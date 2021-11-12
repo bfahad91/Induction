@@ -28,7 +28,7 @@
 
     #regForm {
         background-color: #ffffff;
-        margin: 100px auto;
+        margin: 20px auto;
         font-family: Raleway;
         padding: 40px;
         width: 70%;
@@ -96,190 +96,234 @@
         background-color: #04AA6D;
     }
 
+    header {
+        width: 100%;
+        height: 125px;
+        background: #fff url(/images/logo-bar.gif) center 5px no-repeat;
+    }
+
+    label {
+        font-weight: bold;
+    }
+    .a{
+        margin-bottom: 2rem;
+    }
 </style>
 
 <body>
+    <header>
+        <div class="container">
 
-    <form id="regForm" method="POST" action="{{ route('personal.submit') }}" enctype="multipart/form-data">
+        </div>
+    </header>
+    <form id="regForm" method="POST" action="{{ route('front.post.store') }}" enctype="multipart/form-data">
         @csrf
-        <h1>OGRA Registration Form</h1>
+        <h1 style="font-weight:1000">OGRA Application Form</h1>
         <div class="form-group">
-            <label>Name of Position applied for:</label>
+            <label>
+                <h5 style="font-weight:bold">Name of Position applied for</h5>
+            </label>
             <span class="form-control"><b>{{ $advertisement->title }} </b></span> <br>
-            {{-- <input type="text" class="form-control" data-error="You must have a name." name="fullName" placeholder="fullName" required> --}}
+            {{-- <input type="text" class="form-control validate" value="{{ old('start_date') }}" name="fullName" placeholder="fullName" required> --}}
 
             <!-- Error -->
             <div class="help-block with-errors"></div>
         </div>
         <!-- One "tab" for each step in the form: -->
         <div class="tab row" style="display: flex">
-            <h1>Personal Information:</h1>
+            <h1 style="font-weight:1000">Personal Information</h1>
+            <div class="form-group col-md-4">
+                <label>CV:</label>
+                <input type="file" class="form-control" name="cv_file" placeholder="" required>
+
+                <!-- Error -->
+                <div class="help-block with-errors"></div>
+            </div>
             <input style="width:150px" name="advertisement_id" value="{{ $advertisement->id }}" type="hidden">
 
             <div class="form-group col-md-12 row">
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Full Name:</label>
-                    <input type="text" class="form-control" data-error="You must have a name." name="fullName" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="text" class="form-control validate" value="{{ old('fullName') }}" name="fullName" placeholder="Full Name" required>
+                    @error('courseName')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-4">
-                    <label>picture:</label>
-                <input type="file" class="form-control" data-error="You must have a name." name="image" placeholder="" required>
+                <div class="form-group a col-md-4">
+                    <label>Picture:</label>
+                    <input type="file" class="form-control validate" value="{{ old('image') }}" name="image" required>
+                    @error('image')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-4">
-                    <label>picture:</label>
+                <div class="form-group a col-md-4">
                     <img src="" alt="">
                 </div>
-
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Father Name:</label>
-                    <input type="text" class="form-control" data-error="You must have a name." name="fatherName" id="fatherName" placeholder="" required>
+                    <input type="text" class="form-control validate" value="{{ old('fatherName') }}" name="fatherName" id="fatherName"
+                        placeholder="Father Name" required>
+                        @error('fatherName')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Date of Birth:</label>
-                    <input type="date" class="form-control" name="dob" data-error="You must have a name." id="dob" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="date" class="form-control validate" name="dob" id="dob" value="{{ old('dob') }}" placeholder="Date of Birth" required>
+                    @error('dob')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Age:</label>
-                    <input type="text" class="form-control" name="age" data-error="You must have a name." id="age" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="text" class="form-control validate" value="{{ old('age') }}" name="age" id="age" placeholder="Age" required>
+                    @error('age')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Birth Place:</label>
-                    <input type="text" class="form-control" name="birthPlace" data-error="You must have a name." id="birthPlace" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="text" class="form-control validate" value="{{ old('birthPlace') }}" name="birthPlace" id="birthPlace"
+                        placeholder="Birth Place" required>
+                        @error('birthPlace')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Marital Status:</label>
-                    <select class="form-control" name="maritalStatus" id="">
+                    <select class="form-control validate" name="maritalStatus" value="{{ old('maritalStatus') }}">
                         <option value="" selected disabled>-- select maritial status --</option>
                         <option value="single">single</option>
                         <option value="married">Married</option>
                     </select>
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Religion:</label>
-                    <input type="text" class="form-control" name="religion" data-error="You must have a name." id="religion" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="text" class="form-control validate" value="{{ old('religion') }}" name="religion" id="religion" placeholder="Religion"
+                        required>
+                        @error('religion')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Nationality:</label>
-                    <input type="text" class="form-control" name="nationality" data-error="You must have a name." id="nationality" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="text" class="form-control validate" value="{{ old('nationality') }}" name="nationality" id="nationality"
+                        placeholder="Nationality" required>
+                        @error('nationality')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>CNIC:</label>
-                    <input type="number" class="form-control" name="cnic" data-error="You must have a name." id="cnic" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="number" class="form-control validate" name="cnic" id="cnic" value="{{ old('cnic') }}" placeholder="CNIC" required>
+                    @error('cnic')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
-                    <label>phone Number:</label>
-                    <input type="number" class="form-control" name="number" data-error="You must have a name." id="number" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                <div class="form-group a col-md-4">
+                    <label>Phone Number:</label>
+                    <input type="number" class="form-control validate" name="number" id="number" value="{{ old('number') }}" placeholder="Phone Number"
+                        required>
+                        @error('number')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Domicile:</label>
-                    <input type="text" class="form-control" name="domicile" data-error="You must have a name." id="domicile" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="text" class="form-control validate" value="{{ old('domicile') }}" name="domicile" id="domicile" placeholder="Domicile"
+                        required>
+                        @error('domicile')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Permanent Address:</label>
-                    <input type="text" class="form-control" name="permanentAddress" data-error="You must have a name." id="permanentAddress" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="text" class="form-control validate" value="{{ old('permanentAddress') }}" name="permanentAddress" id="permanentAddress"
+                        placeholder="Permanent Address" required>
+                        @error('permanentAddress')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Present Address:</label>
-                    <input type="text" class="form-control" name="presentAddress" data-error="You must have a name." id="presentAddress" placeholder="" required>
+                    <input type="text" class="form-control validate" value="{{ old('presentAddress') }}" name="presentAddress" id="presentAddress"
+                        placeholder="Present Address" required>
+                        @error('presentAddress')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
 
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>PEC Number:</label>
-                    <input type="text" class="form-control" name="pec_No" data-error="You must have a name." id="pec_No" placeholder="" required>
+                    <input type="text" class="form-control" value="{{ old('pec_No') }}" name="pec_No" id="pec_No" placeholder="PEC Number"
+                        required>
+                        @error('pec_No')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
 
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Office phone No:</label>
-                    <input type="text" class="form-control" name="office" data-error="You must have a name." id="office" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="number" class="form-control" value="{{ old('office') }}" name="office" id="office" placeholder="Office phone No"
+                        required>
+                        @error('office')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Residence No:</label>
-                    <input type="text" class="form-control" name="residence" data-error="You must have a name." id="residence" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="number" class="form-control" value="{{ old('residence') }}" name="residence" id="residence" placeholder="Residence No"
+                        required>
+                        @error('residence')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Cell No:</label>
-                    <input type="number" class="form-control" name="cell" data-error="You must have a name." id="cell" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="number" class="form-control validate" name="cell" id="cell" value="{{ old('cell') }}" placeholder="Cell No" required>
+                    @error('cell')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group a col-md-4">
                     <label>Email:</label>
-                    <input type="email" class="form-control" name="email" data-error="You must have a name." id="email" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                    <input type="email" class="form-control validate" name="email" id="email" value="{{ old('email') }}" placeholder="Email" required>
+                    @error('email')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
-                    <label>postQualificationExperience:</label>
-                    <input type="postQualificationExperience" class="form-control" name="postQualificationExperience" data-error="You must have a name." id="postQualificationExperience" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                <div class="form-group a col-md-4">
+                    <label>Post Qualification Experience:</label>
+                    <input type="text" class="form-control validate" name="postQualificationExperience"  value="{{ old('postQualificationExperience') }}"
+                        id="postQualificationExperience" placeholder="Post Qualification Experience" required>
+                        @error('postQualificationExperience')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
-                    <label>grossMonthlySalary:</label>
-                    <input type="text" class="form-control" name="grossMonthlySalary" data-error="You must have a name." id="grossMonthlySalary" placeholder="" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                <div class="form-group a col-md-4">
+                    <label>Gross Monthly Salary:</label>
+                    <input type="number" class="form-control validate" value="{{ old('start_date') }}" name="grossMonthlySalary" id="grossMonthlySalary"  value="{{ old('grossMonthlySalary') }}"
+                        placeholder="Gross Monthly Salary" required>
+                        @error('grossMonthlySalary')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
-                <div class="form-group col-md-3">
-                    <label>professionalAchievements:</label>
-                    <input type="number" class="form-control" name="professionalAchievements" data-error="You must have a name." id="professionalAchievements" placeholder="Professional Achievements" required>
-
-                    <!-- Error -->
-                    <div class="help-block with-errors"></div>
+                <div class="form-group a col-md-12">
+                    <label>Professional Achievements:</label>
+                    <textarea name="professionalAchievements" class="form-control validate" id="professionalAchievements" cols="30" rows="10"></textarea>
+                    {{-- <input type="text" class="form-control validate" name="professionalAchievements"  value="{{ old('professionalAchievements') }}"
+                        id="professionalAchievements" placeholder="Professional Achievements" required> --}}
+                        @error('professionalAchievements')
+                    <div class="error alert text-danger">{{ $message }}</div>
+                @enderror
                 </div>
             </div>
         </div>
         <div class="tab">
             <h1>Academic Information</h1>
-            <p>Educational, Technical & Professional Qualifications(Please start with most recent qualifications)</p>
+            <p class="text-muted">Educational & Technical Qualifications (Please start with most recent qualifications)</p>
             <p class="form-group" id="dataTableID" style="margin-right: 5px;">
-                <label>Degree</label>
+
             <div class="form-group">
 
                 <div class="alert alert-danger print-error-msg" style="display:none">
@@ -292,25 +336,50 @@
                 </div>
 
                 <?php $c = 1; ?>
-                <div class="table-responsive col-md-2-offset col-md-8">
-                    <table class="table table-bordered" id="dynamic_field">
+                <div class="table-responsive col-md-2-offset col-md-12">
+                    <table class="table table-bordered" id="dynamic_field_prof">
+                        <thead>
+                            <tr>
+                                <th>Degree</th>
+                                <th>Institute</th>
+                                <th>To</th>
+                                <th>From</th>
+                                <th>Passing Year</th>
+                                <th>Marks</th>
+                                <th>Total</th>
+                                <th>GPA/Grade</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
                         <tr>
-                            <td class="custom-tbl"><input type="text" name="courseName[]" placeholder="Course Name"
-                                    class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="instituteName[]"
-                                    placeholder="Institute Name" class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="to_prof_inst[]" placeholder="To"
-                                    class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="from_prof_inst[]" placeholder="From"
-                                    class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="description[]" placeholder="Description"
-                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="degreeName[]" placeholder="Degree"
+                                    class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="institute[]" placeholder="Institute"
+                                    class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="date" name="to_institute[]" placeholder="To"
+                                    class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="date" name="from_institute[]" placeholder="From"
+                                    class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="passingYear[]" placeholder="PassingYear"
+                                    class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="marksObtained[]"
+                                    placeholder="Marks Obtained" class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="totalMarks[]" placeholder="Total Marks"
+                                    class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="GPA_or_grade[]" placeholder="GPA/Grade"
+                                    class="form-control validate name_list" /></td>
+                            <td class="custom-tbl">
+                                {{-- <input type="text" name="remarks[]" placeholder="Remarks"
+                                    class="form-control validate name_list" /> --}}
+                                <textarea name="remarks[]" id="" cols="10" rows="2"></textarea>
+                            </td>
 
-                            <td><button type="button" name="add" id="add"
+                            <td><button type="button" name="add" id="add_prof"
                                     class="btn btn-success"><b>+</b></span></button></td>
                         </tr>
                     </table>
                 </div>
+
 
             </div>
         </div>
@@ -330,29 +399,30 @@
                 </div>
 
                 <?php $c = 1; ?>
-                <div class="table-responsive col-md-2-offset col-md-8">
-                    <table class="table table-bordered" id="dynamic_field_prof">
+                <div class="table-responsive col-md-2-offset col-md-12">
+                    <table class="table table-bordered" id="dynamic_field">
+                        <thead>
+                            <tr>
+                                <th>Course</th>
+                                <th>Institute</th>
+                                <th>To</th>
+                                <th>From</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
                         <tr>
-                            <td class="custom-tbl"><input type="text" name="degreeName[]" placeholder="Degree Name"
-                                    class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="institute[]"
-                                    placeholder="Institute Name" class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="to_institute[]" placeholder="To"
-                                    class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="from_institute[]" placeholder="From"
-                                    class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="passingYear[]" placeholder="PassingYear"
-                                    class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="marksObtained[]"
-                                    placeholder="Marks Obtained" class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="totalMarks[]" placeholder="Total Marks"
-                                    class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="GPA_or_grade[]" placeholder="GPA/Grade"
-                                    class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="remarks[]" placeholder="Remarks"
-                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="courseName[]" placeholder="Course Name"
+                                    class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="instituteName[]"
+                                    placeholder="Institute Name" class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="date" name="to_prof_inst[]" placeholder="To"
+                                    class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="date" name="from_prof_inst[]" placeholder="From"
+                                    class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="description[]" placeholder="Description"
+                                    class="form-control validate name_list" /></td>
 
-                            <td><button type="button" name="add" id="add_prof"
+                            <td><button type="button" name="add" id="add"
                                     class="btn btn-success"><b>+</b></span></button></td>
                         </tr>
                     </table>
@@ -378,19 +448,28 @@
                 </div>
 
                 <?php $c = 1; ?>
-                <div class="table-responsive col-md-2-offset col-md-8">
+                <div class="table-responsive col-md-2-offset col-md-12">
                     <table class="table table-bordered" id="dynamic_field_emp">
+                        <thead>
+                            <tr>
+                                <th>Employer</th>
+                                <th>To</th>
+                                <th>From</th>
+                                <th>Position</th>
+                                <th>Responsibilities</th>
+                            </tr>
+                        </thead>
                         <tr>
-                            <td class="custom-tbl"><input type="text" name="employerName[]"
-                                    placeholder="Degree Name" class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="to_employer[]" placeholder="To"
-                                    class="form-control name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="from_employer[]" placeholder="From"
-                                    class="form-control name_list" /></td>
+                            <td class="custom-tbl"><input type="text" name="employerName[]" placeholder="Employer"
+                                    class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="date" name="to_employer[]" placeholder="To"
+                                    class="form-control validate name_list" /></td>
+                            <td class="custom-tbl"><input type="date" name="from_employer[]" placeholder="From"
+                                    class="form-control validate name_list" /></td>
                             <td class="custom-tbl"><input type="text" name="position[]" placeholder="Position"
-                                    class="form-control name_list" /></td>
+                                    class="form-control validate name_list" /></td>
                             <td class="custom-tbl"><input type="text" name="responsibilities[]"
-                                    placeholder="Responsibilities" class="form-control name_list" /></td>
+                                    placeholder="Responsibilities" class="form-control validate name_list" /></td>
 
                             <td><button type="button" name="add" id="add_emp"
                                     class="btn btn-success"><b>+</b></span></button></td>
@@ -429,14 +508,14 @@
     <script type="text/javascript">
         $(document).ready(function() {
 
-            $url = '{{ route('personal.submit') }}';
+            $url = '{{ route('front.post.store') }}';
             var i = 1;
 
 
             $('#add').click(function() {
                 i++;
                 $('#dynamic_field').append('<tr id="row' + i +
-                    '" class="dynamic-added"><td class="custom-tbl"><input type="text" name="courseName[]" placeholder="Course Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="instituteName[]" placeholder="Institute Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="to_prof_inst[]" placeholder="To" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="from_prof_inst[]" placeholder="From" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="description[]" placeholder="Description" class="form-control name_list" /></td><td><button type="button" name="remove" id="' +
+                    '" class="dynamic-added"><td class="custom-tbl"><input type="text" name="courseName[]" placeholder="Course" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="instituteName[]" placeholder="Institute" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="date" name="to_prof_inst[]" placeholder="To" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="date" name="from_prof_inst[]" placeholder="From" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="description[]" placeholder="Description" class="form-control validate name_list" /></td><td><button type="button" name="remove" id="' +
                     i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
             });
 
@@ -450,7 +529,7 @@
             $('#add_prof').click(function() {
                 i++;
                 $('#dynamic_field_prof').append('<tr id="row' + i +
-                    '" class="dynamic-added"><td class="custom-tbl"><input type="text" name="degreeName[]" placeholder="Degree Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="institute[]" placeholder="Institute Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="to_institute[]" placeholder="To" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="from_institute[]" placeholder="From" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="passingYear[]" placeholder="PassingYear" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="marksObtained[]" placeholder="Marks Obtained" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="totalMarks[]" placeholder="Total Marks" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="GPA_or_grade[]" placeholder="GPA/Grade" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="remarks[]" placeholder="Remarks" class="form-control name_list" /></td><td><button type="button" name="remove" id="' +
+                    '" class="dynamic-added"><td class="custom-tbl"><input type="text" name="degreeName[]" placeholder="Degree" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="institute[]" placeholder="Institute" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="date" name="to_institute[]" placeholder="To" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="date" name="from_institute[]" placeholder="From" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="passingYear[]" placeholder="PassingYear" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="marksObtained[]" placeholder="Marks Obtained" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="totalMarks[]" placeholder="Total Marks" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="GPA_or_grade[]" placeholder="GPA/Grade" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="remarks[]" placeholder="Remarks" class="form-control validate name_list" /></td><td><button type="button" name="remove" id="' +
                     i + '" class="btn btn-danger btn_remove_prof">X</button></td></tr>');
             });
 
@@ -465,7 +544,7 @@
             $('#add_emp').click(function() {
                 i++;
                 $('#dynamic_field_emp').append('<tr id="row' + i +
-                    '" class="dynamic-added"><td class="custom-tbl"><input type="text" name="employerName[]" placeholder="Degree Name" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="to_employer[]" placeholder="To" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="from_employer[]" placeholder="From" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="position[]" placeholder="Position" class="form-control name_list" /></td><td class="custom-tbl"><input type="text" name="responsibilities[]" placeholder="Responsibilities" class="form-control name_list" /></td><td><button type="button" name="remove" id="' +
+                    '" class="dynamic-added"><td class="custom-tbl"><input type="text" name="employerName[]" placeholder="Employer" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="date" name="to_employer[]" placeholder="To" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="date" name="from_employer[]" placeholder="From" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="position[]" placeholder="Position" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="responsibilities[]" placeholder="Responsibilities" class="form-control validate name_list" /></td><td><button type="button" name="remove" id="' +
                     i + '" class="btn btn-danger btn_remove_emp">X</button></td></tr>');
             });
 
@@ -524,9 +603,9 @@
             // This function deals with validation of the form fields
             var x, y, i, valid = true;
             x = document.getElementsByClassName("tab");
-            y = x[currentTab].getElementsByTagName("input");
+            y = x[currentTab].getElementsByClassName("validate");
             // A loop that checks every input field in the current tab:
-            for (i = 0; i < y.length; i++) {
+            for (i = 1; i < y.length; i++) {
                 // If a field is empty...
                 if (y[i].value == "") {
                     // add an "invalid" class to the field:

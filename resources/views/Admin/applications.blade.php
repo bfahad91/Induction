@@ -5,38 +5,48 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">DataTable with default features</h3>
+                            <h3 class="card-title">Applications</h3>
                         </div>
+                        @if ($advertisement != null)
+                            <div class="card">
+                                <a href="{{ route('admin.export',$advertisement->id) }}" class="btn btn-success col-1 right">Export</a>
+                            </div>
+                        @else
+
+                        @endif
 
                         <div class="card-body" style="overflow-x:auto;">
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
-                                        <th>advertisement_id</th>
-                                        <th>fullName</th>
+                                        <th>Id</th>
+                                        <th>CV</th>
+                                        <th>Ad title</th>
+                                        <th>Name</th>
                                         <th>picture</th>
-                                        <th>fatherName</th>
-                                        <th>dob</th>
-                                        <th>domicile</th>
-                                        <th>age</th>
-                                        <th>birthPlace</th>
-                                        <th>maritalStatus</th>
-                                        <th>religion</th>
-                                        <th>nationality</th>
-                                        <th>cnic</th>
-                                        <th>permanentAddress</th>
-                                        <th>presentAddress</th>
-                                        <th>cell#</th>
+                                        <th>Father Name</th>
+                                        <th>D.O.B</th>
+                                        <th>Domicile</th>
+                                        <th>Age</th>
+                                        <th>Birth Place</th>
+                                        <th>Marital Status</th>
+                                        <th>Religion</th>
+                                        <th>Nationality</th>
+                                        <th>Cnic</th>
+                                        <th>Permanent Address</th>
+                                        <th>Present Address</th>
+                                        <th>Cell#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($applications as $item)
                                         <tr>
                                             <td>{{ $item->id }}</td>
-                                            <td>{{ $item->advertisement_id }}</td>
+                                            <th><a href="{{ asset($item->cv) }}" target="blank">cv</a></th>
+                                            <td>{{ $item->advertisement->title }}</td>
                                             <td>{{ $item->fullName }}</td>
-                                            <td>{{ $item->picture }}</td>
+                                            <td><a href="{{ asset($item->picture) }}" target="blank"><img
+                                                        src="{{ asset($item->picture) }}" alt=""></a></td>
                                             <td>{{ $item->fatherName }}</td>
                                             <td>{{ $item->dob }}</td>
                                             <td>{{ $item->domicile }}</td>
@@ -54,6 +64,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="ml-3 mb-3">{!! $applications->links() !!}</div>
                     </div>
                 </div>
             </div>

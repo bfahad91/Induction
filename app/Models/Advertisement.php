@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Advertisement extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','title_urdu','adImg','description','start_date','end_date'];
+    protected $fillable = ['title','title_urdu','adImg','description','start_date','end_date','is_active'];
 
 
     /**
