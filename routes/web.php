@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Front\AdvertisementController;
+use App\Http\Controllers\Admin\AdvertisementController;
 use App\Http\Controllers\Front\ApplicationController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -23,11 +23,12 @@ require __DIR__ . '/auth.php';
 Route::get('/', [ApplicationController::class, 'index'])->name('welcome');
 
 Route::group(['middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::view('dashboard', 'dashboard')->name('dashboard');
+    Route::get('dashboard', [AdminController::class,'index'])->name('dashboard');
     Route::get('applications', [AdminController::class, 'GetAllApplication'])->name('applications');
     Route::get('ads/applications/{advertisement}', [AdvertisementController::class, 'Advertisment_Applications'])->name('advertisements.applications');
+    Route::get('advertisements/active', [AdvertisementController::class, 'activeAds'])->name('advertisements.active');
     Route::resource('advertisements', AdvertisementController::class);
-    Route::post('ajax/active/ad/{id}', [AdvertisementController::class, 'isActive_Ajax'])->name('isActive');
+    Route::get('active/ad', [AdvertisementController::class, 'isActive_Ajax'])->name('isActive');
     Route::get('export/{advertisement}', [AdminController::class, 'export'])->name('export');
 });
 // public routes

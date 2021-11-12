@@ -10,6 +10,14 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AdminController extends Controller
 {
+    public function index()
+    {
+        $ads = Advertisement::all();
+        $activeAds = Advertisement::where('is_active',true)->get();
+        $applications = Application::all();
+
+        return view('dashboard',compact('ads','activeAds','applications'));
+    }
     public function GetAllApplication()
     {
         $applications = Application::with(['education_info', 'employment_info', 'professional_info', 'advertisement'])->paginate();

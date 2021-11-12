@@ -18,11 +18,11 @@ class CreateEducationInfosTable extends Migration
             $table->foreignId('application_id');  // FK application model
             $table->string('degreeName');
             $table->string('institute');
-            $table->string('to_institute');
-            $table->string('from_institute');
-            $table->string('passingYear');
-            $table->string('marksObtained');
-            $table->string('totalMarks');
+            $table->date('to_institute');
+            $table->date('from_institute');
+            $table->integer('passingYear');
+            $table->integer('marksObtained');
+            $table->integer('totalMarks');
             $table->string('GPA_or_grade');
             $table->string('remarks');
             $table->timestamps();

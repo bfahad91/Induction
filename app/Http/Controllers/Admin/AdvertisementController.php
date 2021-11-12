@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Front;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
@@ -16,7 +16,7 @@ class AdvertisementController extends Controller
      */
     public function index()
     {
-        $ads = Advertisement::orderBy('id', 'desc')->get();
+        $ads = Advertisement::orderBy('id', 'desc')->paginate();
         return view('Admin.Advertisements.index', compact('ads'));
     }
 
@@ -46,12 +46,9 @@ class AdvertisementController extends Controller
             'end_date' => 'required',
             'is_active' => 'nullable',
         ]);
-        // dd($request->is_active);
+        // Image Store
         $imageName = date("d-m-Y") . '-' . $request->image->getClientOriginalName();
-
-        // $request->image->move(public_path('images/ads'), $imageName);
         $img = $request->file('image')->storeAs('public/uploads/Ads', $imageName);
-
         $request->merge(['adImg' => 'storage/uploads/Ads/' . $imageName]);
 
         Advertisement::create([
@@ -74,9 +71,18 @@ class AdvertisementController extends Controller
 
         return view('Admin.applications', compact('applications','advertisement'));
     }
-    public function isActive_Ajax(Request $request, $id)
+    public function isActive_Ajax(Request $request)
     {
-        dd($id);
+        $ad = Advertisement::find($request->ad_id);
+        $ad->is_active = $request->is_active;
+        $ad->save();
+        // toastr()->success('Success!', 'Advertisement created Successfully');
+        return response()->json(['success'=>'Status change successfully.']);
+    }
+    public function activeAds()
+    {
+        $ads = Advertisement::where('is_active',true)->paginate();
+        return view('Admin.Advertisements.index',compact('ads'));
     }
     /**
      * Display the specified resource.
@@ -95,9 +101,9 @@ class AdvertisementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Advertisement $advertisement)
     {
-        //
+        return view('Admin.Advertisements.edit', compact('advertisement'));
     }
 
     /**
@@ -107,9 +113,9 @@ class AdvertisementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Advertisement $advertisement)
     {
-        //
+        dd($advertisement->getOriginal(),$request->all());
     }
 
     /**

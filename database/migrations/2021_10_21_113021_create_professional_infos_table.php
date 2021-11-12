@@ -18,8 +18,8 @@ class CreateProfessionalInfosTable extends Migration
             $table->foreignId('application_id'); // FK application model
             $table->string('courseName');
             $table->string('instituteName');
-            $table->string('to_prof_inst');
-            $table->string('from_prof_inst');
+            $table->date('to_prof_inst');
+            $table->date('from_prof_inst');
             $table->string('description');
             $table->timestamps();
 

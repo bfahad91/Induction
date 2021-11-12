@@ -31,7 +31,7 @@
         margin: 20px auto;
         font-family: Raleway;
         padding: 40px;
-        width: 70%;
+        width: 90%;
         min-width: 300px;
     }
 
@@ -176,7 +176,7 @@
                 </div>
                 <div class="form-group a col-md-4">
                     <label>Age:</label>
-                    <input type="text" class="form-control validate" value="{{ old('age') }}" name="age" id="age" placeholder="Age" required>
+                    <input type="number" class="form-control validate" value="{{ old('age') }}" name="age" id="age" placeholder="Age" required>
                     @error('age')
                     <div class="error alert text-danger">{{ $message }}</div>
                 @enderror
@@ -362,9 +362,9 @@
                                     class="form-control validate name_list" /></td>
                             <td class="custom-tbl"><input type="text" name="passingYear[]" placeholder="PassingYear"
                                     class="form-control validate name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="marksObtained[]"
+                            <td class="custom-tbl"><input type="number" name="marksObtained[]"
                                     placeholder="Marks Obtained" class="form-control validate name_list" /></td>
-                            <td class="custom-tbl"><input type="text" name="totalMarks[]" placeholder="Total Marks"
+                            <td class="custom-tbl"><input type="number" name="totalMarks[]" placeholder="Total Marks"
                                     class="form-control validate name_list" /></td>
                             <td class="custom-tbl"><input type="text" name="GPA_or_grade[]" placeholder="GPA/Grade"
                                     class="form-control validate name_list" /></td>
@@ -529,7 +529,7 @@
             $('#add_prof').click(function() {
                 i++;
                 $('#dynamic_field_prof').append('<tr id="row' + i +
-                    '" class="dynamic-added"><td class="custom-tbl"><input type="text" name="degreeName[]" placeholder="Degree" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="institute[]" placeholder="Institute" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="date" name="to_institute[]" placeholder="To" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="date" name="from_institute[]" placeholder="From" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="passingYear[]" placeholder="PassingYear" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="marksObtained[]" placeholder="Marks Obtained" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="totalMarks[]" placeholder="Total Marks" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="GPA_or_grade[]" placeholder="GPA/Grade" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="remarks[]" placeholder="Remarks" class="form-control validate name_list" /></td><td><button type="button" name="remove" id="' +
+                    '" class="dynamic-added"><td class="custom-tbl"><input type="text" name="degreeName[]" placeholder="Degree" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="institute[]" placeholder="Institute" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="date" name="to_institute[]" placeholder="To" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="date" name="from_institute[]" placeholder="From" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="passingYear[]" placeholder="PassingYear" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="number" name="marksObtained[]" placeholder="Marks Obtained" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="number" name="totalMarks[]" placeholder="Total Marks" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="GPA_or_grade[]" placeholder="GPA/Grade" class="form-control validate name_list" /></td><td class="custom-tbl"><input type="text" name="remarks[]" placeholder="Remarks" class="form-control validate name_list" /></td><td><button type="button" name="remove" id="' +
                     i + '" class="btn btn-danger btn_remove_prof">X</button></td></tr>');
             });
 

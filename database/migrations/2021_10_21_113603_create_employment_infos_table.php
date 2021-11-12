@@ -17,8 +17,8 @@ class CreateEmploymentInfosTable extends Migration
             $table->id();
             $table->foreignId('application_id'); // FK application model
             $table->string('employerName');
-            $table->string('to_employer');
-            $table->string('from_employer');
+            $table->date('to_employer');
+            $table->date('from_employer');
             $table->string('position');
             $table->string('responsibilities');
             $table->integer('is_recent')->nullable();

@@ -9,7 +9,8 @@
                         </div>
                         @if ($advertisement != null)
                             <div class="card">
-                                <a href="{{ route('admin.export',$advertisement->id) }}" class="btn btn-success col-1 right">Export</a>
+                                <a href="{{ route('admin.export', $advertisement->id) }}"
+                                    class="btn btn-success col-1 right">Export</a>
                             </div>
                         @else
 
@@ -42,7 +43,9 @@
                                     @foreach ($applications as $item)
                                         <tr>
                                             <td>{{ $item->id }}</td>
-                                            <th><a href="{{ asset($item->cv) }}" target="blank">cv</a></th>
+                                            <th><a href="{{ asset($item->cv) }}" target="blank"><img
+                                                        src="https://ogra.org.pk/public/assets/front/images/pdf.png"
+                                                        alt=""></a></th>
                                             <td>{{ $item->advertisement->title }}</td>
                                             <td>{{ $item->fullName }}</td>
                                             <td><a href="{{ asset($item->picture) }}" target="blank"><img

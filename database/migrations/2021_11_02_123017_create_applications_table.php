@@ -20,7 +20,7 @@ class CreateApplicationsTable extends Migration
             $table->string('picture');
             $table->string('cv')->nullable();
             $table->string('fatherName');
-            $table->string('dob');
+            $table->date('dob');
             $table->string('age');
             $table->string('birthPlace');
             $table->string('maritalStatus');
@@ -31,9 +31,9 @@ class CreateApplicationsTable extends Migration
             $table->string('permanentAddress');
             $table->string('presentAddress');
             $table->string('pec_No')->nullable();
-            $table->string('office')->nullable();
-            $table->string('residence')->nullable();
-            $table->string('cell');
+            $table->bigInteger('office')->nullable();
+            $table->bigInteger('residence')->nullable();
+            $table->bigInteger('cell');
             $table->string('email')->nullable();
             $table->string('postQualificationExperience')->nullable();
             $table->string('grossMonthlySalary')->nullable();

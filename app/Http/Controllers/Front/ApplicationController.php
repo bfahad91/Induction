@@ -20,7 +20,7 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        $ads = Advertisement::where('is_active',true)->where('end_date', '>', Carbon::now())->orderBy('id', 'desc')->get();
+        $ads = Advertisement::where('is_active',true)->whereDate('end_date', '>=', Carbon::now('Asia/Karachi'))->orderBy('id', 'desc')->get();
         return view('welcome', compact('ads'));
     }
 
@@ -31,6 +31,10 @@ class ApplicationController extends Controller
      */
     public function create(Advertisement $advertisement)
     {
+        if($advertisement->end_date < Carbon::now())
+        {
+            return redirect()->back()->with('error','Application date Over!');
+        }
         return view('front.application.application', compact('advertisement'));
     }
 
@@ -42,18 +46,12 @@ class ApplicationController extends Controller
      */
     public function store(ApplicationFormRequest $request)
     {
-
         $prof_count = count($request->courseName);
         $degree_count = count($request->degreeName);
         $emp_count = count($request->employerName);
         $rules = [];
-        // $request->validate([
-        //     'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
-        // ]);
+
         if($request->file('cv_file')){
-            // $request->validate([
-            //     'cv_file' => 'required|mimes:pdf|max:2048',
-            // ]);
             // store CV
             $cvname = $request->fullName . '-' . $request->cnic . '-' .date("d-m-Y");
             $cv = $request->file('cv_file')->storeAs('public/uploads/cvs', $cvname);
@@ -63,38 +61,6 @@ class ApplicationController extends Controller
         $imageName = $request->fullName . '-' . $request->cnic . '-' .date("d-m-Y");
         $img = $request->file('image')->storeAs('public/uploads/images', $imageName);
         $request->merge(['picture' => 'storage/uploads/images/' . $imageName]);
-        // dd($request->validated(),$request->all());
-        // for ($i = 0; $i < $prof_count; $i++) {
-        //     $rules["courseName.{$i}"] = 'required';
-        //     $rules["instituteName.{$i}"] = 'required';
-        //     $rules["to_prof_inst.{$i}"] = 'required';
-        //     $rules["from_prof_inst.{$i}"] = 'required';
-        //     $rules["description.{$i}"] = 'required';
-        // }
-        // for ($i = 0; $i < $degree_count; $i++) {
-        //     $rules["degreeName.{$i}"] = 'required';
-        //     $rules["institute.{$i}"] = 'required';
-        //     $rules["to_institute.{$i}"] = 'required';
-        //     $rules["from_institute.{$i}"] = 'required';
-        //     $rules["passingYear.{$i}"] = 'required';
-        //     $rules["marksObtained.{$i}"] = 'required';
-        //     $rules["totalMarks.{$i}"] = 'required';
-        //     $rules["GPA_or_grade.{$i}"] = 'required';
-        //     $rules["remarks.{$i}"] = 'required';
-        // }
-        // for ($i = 0; $i < $emp_count; $i++) {
-        //     $rules["employerName.{$i}"] = 'required';
-        //     $rules["to_employer.{$i}"] = 'required';
-        //     $rules["from_employer.{$i}"] = 'required';
-        //     $rules["position.{$i}"] = 'required';
-        //     $rules["responsibilities.{$i}"] = 'required';
-        // }
-
-        // $validator = Validator::make($request->all(), $rules);
-        // if ($validator->fails()) {
-        //     return redirect()->back()->withErrors($validator->errors());
-        // }
-
 
         $application = Application::create([
             'advertisement_id' => $request->advertisement_id,
