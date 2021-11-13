@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateAdvertisementRequest;
 use App\Models\Advertisement;
 use App\Models\Application;
 use Illuminate\Http\Request;
@@ -69,7 +70,7 @@ class AdvertisementController extends Controller
         $applications = Application::where('advertisement_id', $advertisement->id)->with(['education_info', 'employment_info', 'professional_info', 'advertisement'])
             ->paginate();
 
-        return view('Admin.applications', compact('applications','advertisement'));
+        return view('Admin.applications', compact('applications', 'advertisement'));
     }
     public function isActive_Ajax(Request $request)
     {
@@ -77,12 +78,12 @@ class AdvertisementController extends Controller
         $ad->is_active = $request->is_active;
         $ad->save();
         // toastr()->success('Success!', 'Advertisement created Successfully');
-        return response()->json(['success'=>'Status change successfully.']);
+        return response()->json(['success' => 'Status change successfully.']);
     }
     public function activeAds()
     {
-        $ads = Advertisement::where('is_active',true)->paginate();
-        return view('Admin.Advertisements.index',compact('ads'));
+        $ads = Advertisement::where('is_active', true)->paginate();
+        return view('Admin.Advertisements.index', compact('ads'));
     }
     /**
      * Display the specified resource.
@@ -113,9 +114,27 @@ class AdvertisementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Advertisement $advertisement)
+    public function update(UpdateAdvertisementRequest $request, Advertisement $advertisement)
     {
-        dd($advertisement->getOriginal(),$request->all());
+        $is_active = isset($request->is_active) ? 1 : 0;
+        if ($request->file('Adimage')) {
+            $imageName = date("d-m-Y") . '-' . $request->Adimage->getClientOriginalName();
+            $img = $request->file('Adimage')->storeAs('public/uploads/Ads', $imageName);
+            $adImg = 'storage/uploads/Ads/'.$imageName;
+        }
+        else{
+            $adImg = $advertisement->adImg;
+        }
+        $advertisement->update([
+            'adImg' => $adImg,
+            'title' => $request->title,
+            'description' => $request->description,
+            'start_date' => $request->start_date,
+            'end_date'  => $request->end_date,
+            'is_active'  => $is_active,
+        ]);
+        toastr()->success('Success!', 'Advertisement Updated Successfully');
+        return redirect()->route('admin.advertisements.index');
     }
 
     /**

@@ -118,11 +118,13 @@
                         </div>
                     </div>
                 @endif
-                @if ($message = Session::get('error'))
+                @if ($messages = Session::get('error'))
                     <div class="row">
                         <div class="col-md-2"></div>
                         <div class="col-md-6 alert alert-error">
+                            @foreach ($messages as $message)
                             <p>{{ $message }}</p>
+                            @endforeach
                         </div>
                     </div>
                 @endif
