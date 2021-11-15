@@ -31,10 +31,10 @@ class ApplicationController extends Controller
      */
     public function create(Advertisement $advertisement)
     {
-        if($advertisement->end_date < Carbon::now())
-        {
-            return redirect()->back()->with('error','Application date Over!');
-        }
+        // if($advertisement->end_date < Carbon::now())
+        // {
+        //     return redirect()->back()->with('error','Application date Over!');
+        // }
         return view('front.application.application', compact('advertisement'));
     }
 

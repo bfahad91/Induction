@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\ApplicationsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Advertisement;
 use App\Models\Application;
@@ -27,7 +28,7 @@ class AdminController extends Controller
 
     public function export(Advertisement $advertisement)
     {
-        return Excel::download(new Application($advertisement->id), $advertisement->title.'-Applications.xlsx');
+        return Excel::download(new ApplicationsExport($advertisement->id), $advertisement->title.'-Applications.xlsx');
     }
 
     // public function CreateAd()

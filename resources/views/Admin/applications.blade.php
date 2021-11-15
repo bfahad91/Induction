@@ -1,4 +1,7 @@
 <x-layouts.admin>
+    @section('style')
+
+    @endsection
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -17,10 +20,10 @@
                         @endif
 
                         <div class="card-body" style="overflow-x:auto;">
-                            <table class="table table-bordered table-hover">
+                            <table id="example1" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
+                                        <th>#</th>
                                         <th>CV</th>
                                         <th>Ad title</th>
                                         <th>Name</th>
@@ -42,7 +45,7 @@
                                 <tbody>
                                     @foreach ($applications as $item)
                                         <tr>
-                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $loop->count }}</td>
                                             <th><a href="{{ asset($item->cv) }}" target="blank"><img
                                                         src="https://ogra.org.pk/public/assets/front/images/pdf.png"
                                                         alt=""></a></th>

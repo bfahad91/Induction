@@ -1,7 +1,7 @@
 <table id="example1" class="table table-bordered alignCenter">
     <thead>
         <tr>
-            <th>rs</th>
+
             <th>Id</th>
             <th>CV</th>
             <th>Ad title</th>
@@ -55,7 +55,6 @@
                 $rowspan = max([$ed, $prof, $emp]);
             @endphp
             <tr>
-                <td rowspan="{{ $rowspan }}">{{ $rowspan }}</td>
                 <td rowspan="{{ $rowspan }}">{{ $item->id }}</td>
                 <th rowspan="{{ $rowspan }}"><a href="{{ asset($item->cv) }}" target="blank">cv</a></th>
                 <td rowspan="{{ $rowspan }}">{{ $item->advertisement->title }}</td>
