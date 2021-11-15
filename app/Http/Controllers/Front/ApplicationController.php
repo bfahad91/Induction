@@ -120,6 +120,6 @@ class ApplicationController extends Controller
             $employment[] = EmploymentInfo::create($emp);
         }
 
-        return redirect()->route('welcome')->with('success', 'Form Submitted!');
+        return view('front.thankyou')->with('success', 'Form Submitted!');
     }
 }

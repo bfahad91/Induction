@@ -41,3 +41,4 @@ Route::group(['prefix' => 'applicant', 'as' => 'front.'], function () {
 Route::get('/foo', function () {
     Artisan::call('storage:link');
 });
+Route::view('thankyou', 'front.thankyou');
