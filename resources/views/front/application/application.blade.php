@@ -99,7 +99,7 @@
     header {
         width: 100%;
         height: 125px;
-        background: #fff url(/images/logo-bar.gif) center 5px no-repeat;
+        background: #fff url(/images/most_logo.png) center 5px no-repeat;
     }
 
     label {
@@ -120,7 +120,7 @@
     </header>
     <form id="regForm" method="POST" action="{{ route('front.post.store') }}" enctype="multipart/form-data">
         @csrf
-        <h1 style="font-weight:1000">OGRA Application Form</h1>
+        <h1 style="font-weight:1000">MoST Application Form</h1>
         <div class="form-group">
             <label>
                 <h5 style="font-weight:bold">Name of Position applied for</h5>

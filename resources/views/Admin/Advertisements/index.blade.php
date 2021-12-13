@@ -70,7 +70,7 @@
                                         <th>Start Date</th>
                                         <th>End Date</th>
                                         <th>Status</th>
-                                        <th>edit</th>
+                                        <th>Edit</th>
                                         <th>Applications</th>
                                     </tr>
                                 </tfoot>

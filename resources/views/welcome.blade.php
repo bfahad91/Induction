@@ -15,7 +15,7 @@
     <link media="all" type="text/css" rel="stylesheet" href="{{ asset('css/front/responsive.css') }}">
 
     <script type="2069742d15aaf9931ee54bd3-text/javascript">
-        BASEPATH = "https://ogra.org.pk/"
+        BASEPATH = "https://most.gov.pk/"
     </script>
 
     <script src="https://cdn.tiny.cloud/1/4zccr78cmk4w0klm5rnuh0hjix96l43bkhtq8ctv5qz05451/tinymce/5/tinymce.min.js"
@@ -26,7 +26,7 @@
 <body>
 
     <body class="fade-in one">
-        <header>
+        {{-- <header>
             <div class="container">
                 <ul class="language-list">
                     <li><a href="https://ogra.org.pk/lang/en">English</a></li>
@@ -34,19 +34,23 @@
                 </ul>
 
             </div>
-        </header>
+        </header> --}}
         <nav id="menuzord" class="menuzord menuzord-responsive">
             <ul class="menuzord-menu scrollable">
-                <li class="home">
-                    <a href="/">Home <span></span>
+                <li class="brand">
+                    <a href="/"><img style="width: 60%" src="{{ asset('images/most_logo.png') }}" alt="most_logo">
+                    </a>
+                </li>
+                {{-- <li class="home">
+                    <a href="/">Home
                     </a>
                 </li>
 
 
                 <li class="contact">
-                    <a href="https://ogra.org.pk/contact-us">Contact Us <span></span>
+                    <a href="https://most.gov.pk/contact-us">Contact Us <span></span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="scrollable-fix"></li>
             </ul>
         </nav>
@@ -133,105 +137,15 @@
             </div>
         </article>
         <input type="hidden" id="cart-ajax-token" value="6yreXeKe8CW8KHwLkfOwta8b2jvukFXl7x2n9tPH">
-        <footer>
-            <div class="container">
-                <div class="f-logo">
-                    <img src="https://ogra.org.pk/public/assets/front/images/f-logo.png" alt="">
-                </div>
-                <div class="f-links">
-                    <ul>
-                        <li class=f-title><a href="https://ogra.org.pk/vision-statement">Vision Statement</a></li>
-                        <li><a href="https://ogra.org.pk/about-us">About Us</a></li>
-                        <li><a href="https://ogra.org.pk/introduction">Introduction</a></li>
-                        <li><a href="https://ogra.org.pk/senior-management">Senior Management</a></li>
-                        <li><a href="https://ogra.org.pk/location-maps-2">Location Map</a></li>
-                        <li><a href="https://ogra.org.pk/ogra-activities">OGRA Activities</a></li>
-                        <li><a href="https://ogra.org.pk/contact-us">Contact Us</a></li>
-                    </ul>
-                    <ul>
-                        <li class=f-title><a href="https://ogra.org.pk/enforcement-brief">ENFORCEMENT ACTIONS</a></li>
-                    </ul>
-                </div>
-                <div class="f-links">
-                    <ul>
-                        <li class=f-title><a href="javascript:void(0);">LAW</a></li>
-                        <li><a href="https://ogra.org.pk/ordinance">Ordinance</a></li>
-                        <li><a href="https://ogra.org.pk/gas-9">Policies</a></li>
-                        <li><a href="https://ogra.org.pk/oil-9">Rules</a></li>
-                        <li><a href="https://ogra.org.pk/regulations-2">Regulations</a></li>
-                        <li><a href="https://ogra.org.pk/standards">Standards</a></li>
-                    </ul>
-                    <ul>
-                        <li class=f-title><a href="https://ogra.org.pk/advertisements">Advertisements</a></li>
-                        <li><a href="https://ogra.org.pk/tenders">Tenders</a></li>
-                    </ul>
-                </div>
-                <div class="f-links">
-                    <ul>
-                        <li class=f-title><a href="https://ogra.org.pk/oil-12">LICENCES</a></li>
-                        <li><a href="https://ogra.org.pk/oil-12">OIL</a></li>
-                        <li><a href="https://ogra.org.pk/natural-gas-3">Natural Gas</a></li>
-                        <li><a href="https://ogra.org.pk/cng-3">CNG</a></li>
-                        <li><a href="https://ogra.org.pk/lpg-4">LPG</a></li>
-                        <li><a href="https://ogra.org.pk/lng-5">LNG</a></li>
-                    </ul>
-                    <ul>
-                        <li class=f-title><a href="https://ogra.org.pk/complaints">Complaints</a></li>
-                        <li><a href="https://ogra.org.pk/lodge-complaints">Lodge complaints</a></li>
-                        <li><a href="https://ogra.org.pk/complaint-trackingstatus">Complaint Status</a></li>
-                    </ul>
-                </div>
-                <div class="f-links">
-                    <ul>
-                        <li class=f-title><a href="https://ogra.org.pk/departmental-feedback">Feedback</a></li>
-                        <li><a href="https://ogra.org.pk/careersopportunities">Careers</a></li>
-                        <li><a href="https://ogra.org.pk/faqs-2">FAQs</a></li>
-                        <li><a href="https://ogra.org.pk/related-links">Related Links</a></li>
-                        <li><a target=&#039;_blank&#039; href="http://mail.ogra.org.pk">OGRA&#039;s Web-email</a></li>
-                        <li><a href="http://fts.ogra.org.pk">FTS for Internal Use</a></li>
-                        <li><a href="https://ogra.org.pk/disclaimer">Disclaimer</a></li>
-                        <li><a href="https://ogra.org.pk/sitemap">Sitemap</a></li>
-                    </ul>
-                    <div class="f-search">
-                        <form action="https://ogra.org.pk/global/search">
-                            <input type="text" name="keyword" value="" placeholder="Enter Keyword...">
-                            <input type="submit" value="">
-                        </form>
-                    </div>
-                </div>
-                <div class="f-foot">
-                    <div class="f-cp-po">
-                        <p>Copyright 2021 © ogra.org.pk</p>
-                    </div>
-                    <div class="f-rght">
-                        <ul>
-                            <li>
-                                <a href="javascript:;" class="fb"></a>
-                            </li>
-                            <li>
-                                <a href="https://www.youtube.com/channel/UC9TRiw7pcdJbB0r4IC43h_g" target="_blank"
-                                    class="yt"></a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/OGRAISB" class="tw"></a>
-                            </li>
-                            <li>
-                                <a href="https://ogra.org.pk/rss" class="rss"></a>
-                            </li>
-                            <li>
-                                <a href="https://plus.google.com/u/0/" class="gp"></a>
-                            </li>
-                        </ul>
-
-                        <div class="web-counter"><img
-                                src="http://simplehitcounter.com/hit.php?uid=2281948&f=16777215&b=0" border="0"
-                                height="18" width="83" alt="web counter"></div>
-                    </div>
-                </div>
+        <footer style="background-color: black">
+            <div class="container" style="padding-left: 15%">
+                <p style="color:white; ">Copyright © 2011 - 2020 Ministry of Science and Technology, Government of Pakistan.</p>
+                <p style="color:white; margin-top: 10px">1-Constitution Avenue, G-5/2 ,Islamabad.</p>
+                <p style="color:white; margin-top: 10px">Designed by: COMSATS Software Solutions.</p>
+                <br>
+                <br><br>
             </div>
         </footer>
-        <script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js"
-                data-cf-settings="2069742d15aaf9931ee54bd3-|49" defer=""></script>
     </body>
 
 </html>

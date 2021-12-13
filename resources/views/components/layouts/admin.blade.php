@@ -48,7 +48,7 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('images/OGRA-logo.png') }}" alt="OGRALogo" height="60" width="60">
+            <img class="animation__shake" src="{{ asset('images/most_logo.png') }}" alt="MoST-Logo">
         </div>
 
         <!-- Navbar -->
@@ -58,18 +58,18 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #0f5ba9 !important;">
             <!-- Brand Logo -->
-            <a href="{{ route('admin.dashboard') }}" class="brand-link">
-                 <img src="{{ asset('images/OGRA-logo.png') }}" alt="{{ config('app.name') }}"
-                    class="brand-image img-circle elevation-3">
-                <span class="brand-text font-weight-light text-md ml-2">OGRA Induction</span>
+            <a href="{{ route('admin.dashboard') }}" class="mb-5">
+                 <img src="{{ asset('images/most_logo.png') }}" alt="{{ config('app.name') }}"
+                    class="brand-image  elevation-5">
+                {{-- <span class="brand-text font-weight-light text-md ml-2">OGRA Induction</span> --}}
             </a>
-
+        <hr>
             <!-- Sidebar -->
             <div class="sidebar">
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('images/OGRA-logo.png') }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('images/most_logo_small.png') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info ml-2">
                         <a href="#" class="d-block">{{ Auth::user()->name }}</a>
