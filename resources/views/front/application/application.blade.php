@@ -98,8 +98,8 @@
 
     header {
         width: 100%;
-        height: 125px;
-        background: #fff url(/images/logo-bar.gif) center 5px no-repeat;
+        height: 225px;
+        background: #fff url(/images/logo.png) center 5px no-repeat;
     }
 
     label {
@@ -120,7 +120,7 @@
     </header>
     <form id="regForm" method="POST" action="{{ route('front.post.store') }}" enctype="multipart/form-data">
         @csrf
-        <h1 style="font-weight:1000">OGRA Application Form</h1>
+        <h1 style="font-weight:1000">ASFP Application Form</h1>
         <div class="form-group">
             <label>
                 <h5 style="font-weight:bold">Name of Position applied for</h5>
@@ -133,7 +133,7 @@
         </div>
         <!-- One "tab" for each step in the form: -->
         <div class="tab row" style="display: flex">
-            <h1 style="font-weight:1000">Personal Information</h1>
+            <h1 style="font-weight:1000">BIO DATA</h1>
             <div class="form-group col-md-4">
                 <label>CV:</label>
                 <input type="file" class="form-control" name="cv_file" placeholder="" required>
@@ -145,7 +145,7 @@
 
             <div class="form-group col-md-12 row">
                 <div class="form-group a col-md-4">
-                    <label>Full Name:</label>
+                    <label>Name:</label>
                     <input type="text" class="form-control validate" value="{{ old('fullName') }}" name="fullName"
                         placeholder="Full Name" required>
                     @error('courseName')
@@ -153,7 +153,7 @@
                     @enderror
                 </div>
                 <div class="form-group a col-md-4">
-                    <label>Picture:</label>
+                    <label>Recent Photograph:</label>
                     <input type="file" class="form-control validate" value="{{ old('image') }}" name="image" required>
                     @error('image')
                         <div class="error alert text-danger">{{ $message }}</div>
@@ -171,10 +171,36 @@
                     @enderror
                 </div>
                 <div class="form-group a col-md-4">
+                    <label>CNIC No:</label>
+                    <input type="number" class="form-control validate" name="cnic" id="cnic"
+                        value="{{ old('cnic') }}" placeholder="CNIC" required>
+                    @error('cnic')
+                        <div class="error alert text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group a col-md-4">
+                    <label>Gender:</label>
+                    <select name="gender" class="form-control validate" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                    @error('gender')
+                        <div class="error alert text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group a col-md-4">
                     <label>Date of Birth:</label>
                     <input type="date" class="form-control validate" name="dob" id="dob" value="{{ old('dob') }}"
                         placeholder="Date of Birth" required>
                     @error('dob')
+                        <div class="error alert text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-group a col-md-4">
+                    <label>Caste:</label>
+                    <input type="text" class="form-control validate" name="caste" id="caste"
+                        value="{{ old('cnic') }}" placeholder="Caste" required>
+                    @error('cnic')
                         <div class="error alert text-danger">{{ $message }}</div>
                     @enderror
                 </div>
@@ -187,100 +213,65 @@
                     @enderror
                 </div>
                 <div class="form-group a col-md-4">
-                    <label>Birth Place:</label>
-                    <input type="text" class="form-control validate" value="{{ old('birthPlace') }}"
-                        name="birthPlace" id="birthPlace" placeholder="Birth Place" required>
-                    @error('birthPlace')
+                    <label>Age Relaxation:</label>
+                    <select name="age_relaxation" class="form-control validate" required>
+                        <option disabled selected>Please select One (if applicable)</option>
+                        <option value="Armed Forces">Armed Forces - (Army, Navy, PAF)</option>
+                        <option value="Govt. Servant">Govt. Servant</option>
+                        <option value="Widow/ward of Govt. Servant died during service">Widow/ward of Govt. Servant died during service</option>
+                        <option value="Minority">Minority</option>
+                        <option value="Provincial">Provincial</option>
+                    </select>
+                    @error('gender')
                         <div class="error alert text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group a col-md-4">
-                    <label>Marital Status:</label>
-                    <select class="form-control validate" name="maritalStatus" value="{{ old('maritalStatus') }}">
-                        <option value="" selected disabled>-- select maritial status --</option>
-                        <option value="single">single</option>
-                        <option value="married">Married</option>
-                    </select>
-                </div>
-                <div class="form-group a col-md-4">
                     <label>Religion:</label>
-                    <input type="text" class="form-control validate" value="{{ old('religion') }}" name="religion"
-                        id="religion" placeholder="Religion" required>
+                    <select name="religion" class="form-control validate" required>
+                        <option value="muslim">Muslim</option>
+                        <option value="Non-muslim">Non-muslim</option>
+                    </select>
                     @error('religion')
                         <div class="error alert text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group a col-md-4">
-                    <label>Nationality:</label>
-                    <input type="text" class="form-control validate" value="{{ old('nationality') }}"
-                        name="nationality" id="nationality" placeholder="Nationality" required>
-                    @error('nationality')
-                        <div class="error alert text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group a col-md-4">
-                    <label>CNIC:</label>
-                    <input type="number" class="form-control validate" name="cnic" id="cnic"
-                        value="{{ old('cnic') }}" placeholder="CNIC" required>
-                    @error('cnic')
-                        <div class="error alert text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group a col-md-4">
-                    <label>Phone Number:</label>
-                    <input type="number" class="form-control validate" name="number" id="number"
-                        value="{{ old('number') }}" placeholder="Phone Number" required>
-                    @error('number')
+                    <label>Sect:<span class="text-muted"> (if Non-Muslim)</span></label>
+                    <input type="text" class="form-control validate" value="{{ old('age') }}" name="sect" id="sect"
+                        placeholder="Sect" required>
+                    @error('sect')
                         <div class="error alert text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group a col-md-4">
                     <label>Domicile:</label>
-                    <input type="text" class="form-control validate" value="{{ old('domicile') }}" name="domicile"
-                        id="domicile" placeholder="Domicile" required>
+                    <select name="domicile" class="form-control validate" required>
+                        <option disabled selected>-- Please select One --</option>
+                        <option value="ISLAMABAD">ISLAMABAD</option>
+                        <option value="PUNJAB">PUNJAB</option>
+                        <option value="SINDH">SINDH</option>
+                        <option value="BALOCHISTAN">BALOCHISTAN</option>
+                        <option value="KPK">KPK</option>
+                        <option value="GILGIT BALTISTAN">GILGIT BALTISTAN</option>
+                    </select>
                     @error('domicile')
                         <div class="error alert text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group a col-md-4">
-                    <label>Permanent Address:</label>
-                    <input type="text" class="form-control validate" value="{{ old('permanentAddress') }}"
-                        name="permanentAddress" id="permanentAddress" placeholder="Permanent Address" required>
-                    @error('permanentAddress')
+                    <label>District of Domicile:</label>
+                    <input type="text" class="form-control validate" value="{{ old('age') }}" name="domicile_district" id="domicile_district"
+                        placeholder="Domicile District" required>
+                    @error('domicile_district')
                         <div class="error alert text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group a col-md-4">
-                    <label>Present Address:</label>
-                    <input type="text" class="form-control validate" value="{{ old('presentAddress') }}"
-                        name="presentAddress" id="presentAddress" placeholder="Present Address" required>
-                    @error('presentAddress')
-                        <div class="error alert text-danger">{{ $message }}</div>
-                    @enderror
-
-                </div>
-                <div class="form-group a col-md-4">
-                    <label>PEC Number:</label>
-                    <input type="text" class="form-control" value="{{ old('pec_No') }}" name="pec_No" id="pec_No"
-                        placeholder="PEC Number" required>
-                    @error('pec_No')
-                        <div class="error alert text-danger">{{ $message }}</div>
-                    @enderror
-
-                </div>
-                <div class="form-group a col-md-4">
-                    <label>Office phone No:</label>
-                    <input type="number" class="form-control" value="{{ old('office') }}" name="office" id="office"
-                        placeholder="Office phone No" required>
-                    @error('office')
-                        <div class="error alert text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group a col-md-4">
-                    <label>Residence No:</label>
-                    <input type="number" class="form-control" value="{{ old('residence') }}" name="residence"
-                        id="residence" placeholder="Residence No" required>
-                    @error('residence')
+                    <label>Mobile Number:</label>
+                    <input type="number" class="form-control validate" name="number" id="number"
+                        value="{{ old('number') }}" placeholder="Phone Number" required>
+                    @error('number')
                         <div class="error alert text-danger">{{ $message }}</div>
                     @enderror
                 </div>
@@ -300,34 +291,52 @@
                         <div class="error alert text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+
+
+
+
+
+
+
                 <div class="form-group a col-md-4">
-                    <label>Post Qualification Experience:</label>
-                    <input type="text" class="form-control validate" name="postQualificationExperience"
-                        value="{{ old('postQualificationExperience') }}" id="postQualificationExperience"
-                        placeholder="Post Qualification Experience" required>
-                    @error('postQualificationExperience')
+                    <label>Permanent Address:</label>
+                    <input type="text" class="form-control validate" value="{{ old('permanentAddress') }}"
+                        name="permanentAddress" id="permanentAddress" placeholder="Permanent Address" required>
+                    @error('permanentAddress')
                         <div class="error alert text-danger">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="form-group a col-md-4">
-                    <label>Gross Monthly Salary:</label>
-                    <input type="number" class="form-control validate" value="{{ old('start_date') }}"
-                        name="grossMonthlySalary" id="grossMonthlySalary" value="{{ old('grossMonthlySalary') }}"
-                        placeholder="Gross Monthly Salary" required>
-                    @error('grossMonthlySalary')
+                    <label>Present Address:</label>
+                    <input type="text" class="form-control validate" value="{{ old('presentAddress') }}"
+                        name="presentAddress" id="presentAddress" placeholder="Present Address" required>
+                    @error('presentAddress')
+                        <div class="error alert text-danger">{{ $message }}</div>
+                    @enderror
+
+                </div>
+
+
+
+                {{-- <div class="form-group a col-md-4">
+                    <label>PEC Number:</label>
+                    <input type="text" class="form-control" value="{{ old('pec_No') }}" name="pec_No" id="pec_No"
+                        placeholder="PEC Number" required>
+                    @error('pec_No')
+                        <div class="error alert text-danger">{{ $message }}</div>
+                    @enderror
+
+                </div> --}}
+
+                <div class="form-group a col-md-4">
+                    <label>Contact No:</label>
+                    <input type="number" class="form-control" value="{{ old('contact_no') }}" name="contact_no"
+                        id="residence" placeholder="Contact No" required>
+                    @error('contact_no')
                         <div class="error alert text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <div class="form-group a col-md-12">
-                    <label>Professional Achievements:</label>
-                    <textarea name="professionalAchievements" class="form-control validate"
-                        id="professionalAchievements" cols="30" rows="10"></textarea>
-                    {{-- <input type="text" class="form-control validate" name="professionalAchievements"  value="{{ old('professionalAchievements') }}"
-                        id="professionalAchievements" placeholder="Professional Achievements" required> --}}
-                    @error('professionalAchievements')
-                        <div class="error alert text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
+
             </div>
         </div>
         <div class="tab">

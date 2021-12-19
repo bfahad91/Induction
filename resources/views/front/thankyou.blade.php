@@ -81,5 +81,6 @@
 
     <p class="lead">
       <a class="btn btn-primary btn-sm" href="{{ route('welcome')}}" role="button">Continue to homepage</a>
+      <a class="btn btn-primary btn-sm" href="{{ route('front.generate.slip',$application->id)}}" role="button">Download Slip</a>
     </p>
   </div>

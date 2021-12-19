@@ -37,8 +37,11 @@ Route::group(['prefix' => 'applicant', 'as' => 'front.'], function () {
     Route::get('post/apply/{advertisement}', [ApplicationController::class, 'create'])->name('post.apply');
     Route::post('post/apply/store', [ApplicationController::class, 'store'])->name('post.store');
     Route::get('Ads/all', [ApplicationController::class, 'index'])->name('ads.index');
+    Route::get('generate-pdf/{application}', [ApplicationController::class, 'generatePDF'])->name('generate.slip');
 });
 Route::get('/foo', function () {
     Artisan::call('storage:link');
 });
 Route::view('thankyou', 'front.thankyou');
+Route::view('slip', 'slip');
+Route::view('slip2', 'slip2');
