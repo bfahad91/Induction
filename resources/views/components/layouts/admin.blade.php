@@ -48,7 +48,7 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="{{ asset('images/OGRA-logo.png') }}" alt="OGRALogo" height="60" width="60">
+            <img class="animation__shake" src="{{ asset('images/ASF_PK_Logo.png') }}" alt="OGRALogo" height="60" width="60">
         </div>
 
         <!-- Navbar -->
@@ -59,9 +59,9 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #0f5ba9 !important;">
             <!-- Brand Logo -->
             <a href="{{ route('admin.dashboard') }}" class="brand-link">
-                 <img src="{{ asset('images/OGRA-logo.png') }}" alt="{{ config('app.name') }}"
+                 <img src="{{ asset('images/ASF_PK_Logo.png') }}" alt="{{ config('app.name') }}"
                     class="brand-image img-circle elevation-3">
-                <span class="brand-text font-weight-light text-md ml-2">OGRA Induction</span>
+                <span class="brand-text font-weight-light text-md ml-2">ASFP Induction</span>
             </a>
 
             <!-- Sidebar -->
@@ -69,7 +69,7 @@
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
-                        <img src="{{ asset('images/OGRA-logo.png') }}" class="img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('images/ASF_PK_Logo.png') }}" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info ml-2">
                         <a href="#" class="d-block">{{ Auth::user()->name }}</a>
@@ -162,8 +162,8 @@
     <!-- DataTables -->
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js')}}" defer></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}" defer></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}" defer></script>
-    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}" defer></script>
+    {{-- <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}" defer></script>
+    <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}" defer></script> --}}
     <!-- jQuery Knob Chart -->
     <script src="{{ asset('plugins/jquery-knob/jquery.knob.min.js') }}" defer></script>
     <!-- daterangepicker -->
@@ -179,6 +179,19 @@
     <script src="{{ asset('dist/js/adminlte.js') }}" defer></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('dist/js/demo.js') }}" defer></script>
+    <script>
+        $(function () {
+          $('#myTable').DataTable({
+            "paging": false,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": false,
+            "autoWidth": true,
+            "responsive": false,
+          });
+        });
+      </script>
     @yield('javascript')
 </body>
 

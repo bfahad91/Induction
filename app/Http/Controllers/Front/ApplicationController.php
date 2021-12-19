@@ -10,6 +10,7 @@ use App\Models\EducationInfo;
 use App\Models\EmploymentInfo;
 use App\Models\ProfessionalInfo;
 use Carbon\Carbon;
+use PDF;
 
 class ApplicationController extends Controller
 {
@@ -50,7 +51,7 @@ class ApplicationController extends Controller
         $degree_count = count($request->degreeName);
         $emp_count = count($request->employerName);
         $rules = [];
-
+        // dd($request->all());
         if($request->file('cv_file')){
             // store CV
             $cvname = $request->fullName . '-' . $request->cnic . '-' .date("d-m-Y");
@@ -65,28 +66,34 @@ class ApplicationController extends Controller
         $application = Application::create([
             'advertisement_id' => $request->advertisement_id,
             'fullName' => $request->fullName,
-            'picture' => $request->picture,
-            'cv' => $request->cv,
             'fatherName' => $request->fatherName,
-            'dob' => $request->dob,
-            'domicile' => $request->domicile,
-            'age' => $request->age,
-            'birthPlace' => $request->birthPlace,
-            'maritalStatus' => $request->maritalStatus,
-            'religion' => $request->religion,
-            'nationality' => $request->nationality,
+            'picture' => $request->picture,
             'cnic' => $request->cnic,
-            'permanentAddress' => $request->permanentAddress,
-            'presentAddress' => $request->presentAddress,
-            'pec_No' => $request->pec_No,
-            'office' => $request->office,
-            'residence' => $request->residence,
+            'gender' => $request->gender,
+            'dob' => $request->dob,
+            'caste' => $request->caste,
+            'age' => $request->age,
+            'age_relaxation' => $request->age_relaxation,
+            'religion' => $request->religion,
+            'sect' => $request->sect,
+            'domicile' => $request->domicile,
+            'domicile_district' => $request->domicile_district,
             'cell' => $request->cell,
+            'contact_no' => $request->contact_no,
             'email' => $request->email,
-            'postQualificationExperience' => $request->postQualificationExperience,
-            'grossMonthlySalary' => $request->grossMonthlySalary,
-            'professionalAchievements' => $request->professionalAchievements,
-            'name_ad_newspaper' => $request->name_ad_newspaper,
+            'presentAddress' => $request->presentAddress,
+            'permanentAddress' => $request->permanentAddress,
+            'cv' => $request->cv,
+
+            // 'birthPlace' => $request->birthPlace,
+            // 'maritalStatus' => $request->maritalStatus,
+            // 'nationality' => $request->nationality,
+            // 'pec_No' => $request->pec_No,
+            // 'office' => $request->office,
+            // 'postQualificationExperience' => $request->postQualificationExperience,
+            // 'grossMonthlySalary' => $request->grossMonthlySalary,
+            // 'professionalAchievements' => $request->professionalAchievements,
+            // 'name_ad_newspaper' => $request->name_ad_newspaper,
         ]);
         for ($i = 0; $i < $prof_count; $i++) {
             $profession['courseName'] = $request->courseName[$i];
@@ -120,6 +127,15 @@ class ApplicationController extends Controller
             $employment[] = EmploymentInfo::create($emp);
         }
 
-        return view('front.thankyou')->with('success', 'Form Submitted!');
+        return view('front.thankyou',compact('application'))->with('success', 'Form Submitted!');
+    }
+    public function generatePDF(Application $application)
+    {
+        // return view('slip2', compact('application'));
+        set_time_limit(180);
+        $pdf = PDF::loadView('slip',$application);
+        // $pdf = view('slip',compact($application));
+        // $pdf2 = PDF::loadHTML($pdf)->setPaper('a4', 'landscape')->setWarnings(false)->save('myfile.pdf');
+        return $pdf->download('Test-Slip.pdf');
     }
 }
